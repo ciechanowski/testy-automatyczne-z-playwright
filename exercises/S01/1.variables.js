@@ -9,15 +9,11 @@
 
 //// TODO:
 // here place your solution:
+let userAge = 12
+const userName = "John Doe"
 
-
-
-
-
-
-
-
-
+console.log(userName)
+console.log(userAge)
 
 //// DONT MODIFY CODE BELOW!
 // Here You will find expected result of exercise
