@@ -1,5 +1,8 @@
 // Simple for loop looks like this:
 
+// index = index + 1
+// index += 1
+
 for (let index = 0; index < 3; index++) {
   console.log("index:", index);
 }
