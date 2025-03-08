@@ -9,11 +9,14 @@
 
 //// TODO:
 // here place your solution:
+let myArray = ['abc', 'def', 'gh']
+console.log(myArray)
+console.log(myArray[1])
 
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output:
 // On console You should get:
 // ['abc', 'def', 'gh']
-// 'def'
+// def

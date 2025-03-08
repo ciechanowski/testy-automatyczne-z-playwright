@@ -11,11 +11,11 @@
 
 //// TODO:
 // here place your solution:
-function joinStrings(val1, val2, val3 = "!") {
+function joinStrings(val1, val2, val3 = '!') {
     return `${val1} ${val2} ${val3}`
 }
 
-const result = joinStrings("Hello", "World")
+const result = joinStrings('Hello', 'World')
 console.log(result)
 
 //// DON'T MODIFY CODE BELOW!
