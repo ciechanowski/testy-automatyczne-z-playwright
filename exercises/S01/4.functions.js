@@ -11,17 +11,14 @@
 
 //// TODO:
 // here place your solution:
+function joinStrings(val1, val2, val3 = "!") {
+    return `${val1} ${val2} ${val3}`
+}
 
+const result = joinStrings("Hello", "World")
+console.log(result)
 
-
-
-
-
-
-
-
-
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output:

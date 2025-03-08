@@ -12,7 +12,6 @@
 
 //// TODO:
 // here place your solution:
-
 function multiplication(value1, value2) {
     return value1 * value2
 }

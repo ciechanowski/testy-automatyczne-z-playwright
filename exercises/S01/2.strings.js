@@ -17,7 +17,7 @@ console.log(testType + " " + testStatusFailed + " " + testStatusPassed)
 console.log(`integration tests: ${testStatusFailed}`)
 console.log(`integration tests: ${testStatusPassed}`)
 
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output:

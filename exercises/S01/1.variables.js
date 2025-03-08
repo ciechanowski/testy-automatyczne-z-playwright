@@ -15,7 +15,7 @@ const userName = "John Doe"
 console.log(userName)
 console.log(userAge)
 
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output:

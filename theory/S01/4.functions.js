@@ -29,4 +29,4 @@ doSomething()
 // on console You will get:
 // numberOne for addTwoStrings has value: undefined
 
-// IF you dont pass value to function - then parameter will have value undefined!
+// IF you don't pass value to function - then parameter will have value undefined!

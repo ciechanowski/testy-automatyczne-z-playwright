@@ -8,7 +8,7 @@ const constantString = 'World'
 // 'let' and 'const' are 2 most common statement to declare variables.
 // The main difference: value of 'let' CAN be change and 'const' CAN NOT
 
-// TIP: If You dont plan to change value of a variable, then use 'const'
+// TIP: If You don't plan to change value of a variable, then use 'const'
 
 // Variables can have different values - numbers, strings etc:
 let numberVariable = 2
