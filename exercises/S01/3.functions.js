@@ -13,16 +13,14 @@
 //// TODO:
 // here place your solution:
 
+function multiplication(value1, value2) {
+    return value1 * value2
+}
 
+const result = multiplication(3, 7)
+console.log("Result of multiplication:", result)
 
-
-
-
-
-
-
-
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output:
