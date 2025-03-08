@@ -12,17 +12,18 @@
 
 //// TODO:
 // here place your solution:
+const myArray = ['abc', 'def', 'gh'];
+myArray.push('xyz');
+console.log(JSON.stringify(myArray).replace(/,/g, ', '));
 
+const newArray = [1, 2, 3];
+let biggerArray = myArray.concat(newArray);
+console.log(JSON.stringify(biggerArray).replace(/,/g, ', '));
 
+biggerArray[2] = '555';
+console.log(JSON.stringify(biggerArray).replace(/,/g, ', '));
 
-
-
-
-
-
-
-
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output:

@@ -21,7 +21,7 @@ console.log('arrayOfNumbers:', arrayOfNumbers) // now list will look like: [ 1, 
 // arrayOfNumbers: [ 1, 2, 3 ]
 
 
-// Concating (joining) two arrays:
+// Concatenation (joining) two arrays:
 let newArrayOfNumbers = [7, 8, 9]
 let biggerArray = arrayOfNumbers.concat(newArrayOfNumbers)
 console.log('biggerArray after concat:', biggerArray)

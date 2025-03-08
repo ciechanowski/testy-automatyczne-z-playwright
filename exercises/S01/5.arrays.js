@@ -9,9 +9,9 @@
 
 //// TODO:
 // here place your solution:
-let myArray = ['abc', 'def', 'gh']
-console.log(myArray)
-console.log(myArray[1])
+let myArray = ['abc', 'def', 'gh'];
+console.log(myArray);
+console.log(myArray[1]);
 
 //// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise

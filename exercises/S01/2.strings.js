@@ -9,13 +9,13 @@
 
 //// TODO:
 // here place your solution:
-const testType = 'integration tests'
-const testStatusPassed = 'passed'
-const testStatusFailed = 'failed'
+const testType = 'integration tests';
+const testStatusPassed = 'passed';
+const testStatusFailed = 'failed';
 
-console.log(testType + ' ' + testStatusFailed + ' ' + testStatusPassed)
-console.log(`integration tests: ${testStatusFailed}`)
-console.log(`integration tests: ${testStatusPassed}`)
+console.log(testType + ' ' + testStatusFailed + ' ' + testStatusPassed);
+console.log(`integration tests: ${testStatusFailed}`);
+console.log(`integration tests: ${testStatusPassed}`);
 
 //// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
