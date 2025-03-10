@@ -9,22 +9,18 @@
 // npm run es2e2
 
 //// TODO:
-
 function elementChecker(anArray) {
     anArray.forEach(element => {
-        // here place your solution:
-
-
-
-
+        if (element === 1) {
+            console.log("Element value is one!");
+        } else if (element === 0) {
+            console.log("Element value is zero!");
+        }
     });
 }
 
-
-
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
-
 elementChecker([1, 2, false, 0, 8, 0, 1, 8, true, 'test', '0'])
 
 // Expected output:

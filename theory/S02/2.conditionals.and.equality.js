@@ -1,6 +1,5 @@
 let clearDatabase = true
 
-
 if (clearDatabase === true) {
     console.log('Database was cleared!')
 } else {
@@ -19,7 +18,6 @@ console.log('1 == 1 is:', 1 == 1)
 // 1 == true will return... true!
 console.log('1 == true is:', 1 == true)
 // This case is complicated...
-
 
 
 // For '===' it is simple (T - means true):

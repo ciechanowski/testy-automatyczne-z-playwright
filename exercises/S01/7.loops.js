@@ -28,6 +28,7 @@ function elementChecker(anArray) {
 elementChecker([1, 2, 'test'])
 
 // Expected output:
+// Expected output of this script is following info on console:
 // 1
 // 2
 // test
