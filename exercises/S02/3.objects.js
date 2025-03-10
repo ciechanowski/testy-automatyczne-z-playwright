@@ -12,12 +12,23 @@
 
 //// TODO:
 // here place your solution:
+const user = {
+    name: 'test user',
+    address: 'test@test.test',
+    password: '1234',
+};
 
+const rights = ['write', 'read'];
+user['rights'] = rights;
 
+console.log(user);
+console.log(user['name']);
 
+user['name'] = 'admin';
 
+console.log(user['name']);
 
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output:
