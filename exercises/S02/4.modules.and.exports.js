@@ -11,15 +11,11 @@
 
 //// TODO:
 // here place your solution:
+import { printer, userData } from "./helpers.js";
 
+printer(userData);
 
-
-
-
-
-
-
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise
 
 // Expected output of this script is following info on console:
