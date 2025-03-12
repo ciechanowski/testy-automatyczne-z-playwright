@@ -52,5 +52,8 @@
     "es3e4": "node exercises/S03/4.async.await.js"
   },
   "author": "jaktestowac.pl",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^9.6.0"
+  }
 }

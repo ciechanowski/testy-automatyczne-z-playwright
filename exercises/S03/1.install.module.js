@@ -14,7 +14,7 @@
 
 
 
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise and verification!
 
 expect("Such a wonderful day!").to.be.equal("Such a wonderful day!")

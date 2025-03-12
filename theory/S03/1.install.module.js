@@ -65,9 +65,8 @@
 import { faker } from "@faker-js/faker"
 
 // this will generate random names:
-console.log(faker.name.fullName())
-console.log(faker.name.fullName())
-console.log(faker.name.fullName())
-console.log(faker.name.fullName())
-
-
+console.log(faker.lorem.paragraphs(2))
+console.log(faker.person.fullName())
+console.log(faker.person.fullName())
+console.log(faker.person.fullName())
+console.log(faker.person.fullName())
