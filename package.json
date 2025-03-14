@@ -54,6 +54,7 @@
   "author": "jaktestowac.pl",
   "license": "ISC",
   "dependencies": {
-    "@faker-js/faker": "^9.6.0"
+    "@faker-js/faker": "^9.6.0",
+    "chai": "^5.2.0"
   }
 }

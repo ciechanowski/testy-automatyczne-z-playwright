@@ -11,12 +11,10 @@
 
 //// TODO:
 // here place your solution:
-
-
+import { expect } from 'chai';
 
 //// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise and verification!
-
 expect("Such a wonderful day!").to.be.equal("Such a wonderful day!")
 console.log('Module was imported! Congratulations!')
 
