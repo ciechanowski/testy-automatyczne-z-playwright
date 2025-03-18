@@ -17,15 +17,57 @@
 
 //// TODO:
 // here place your solution:
+class Human {
+    name = 'Unknown';
+    age = 0;
 
+    constructor(name) {
+        this.name = name;
+    }
 
+    increaseAge() {
+        this.age++;
+    }
 
+    introduce() {
+        console.log(`Hi, my name is ${this.name} and my age is ${this.age}.`);
+    }
+}
 
+const humanBob = new Human('Bob');
 
+humanBob.increaseAge();
+humanBob.increaseAge();
 
+humanBob.introduce();
 
+// my solution
+// class Human {
+//     name = 'Unknown';
+//     age = 0;
 
-//// DONT MODIFY CODE BELOW!
+//     constructor(name) {
+//         this.name = name;
+//     }
+
+//     increaseAge() {
+//         this.age++;
+//     }
+
+//     introduce() {
+//         console.log(`Hi, my name is ${this.name} and my age is ${this.age}.`);
+//     }
+// }
+
+// const human = new Human();
+
+// human.name = 'Bob';
+// human.age = 1;
+
+// human.increaseAge();
+// human.introduce();
+
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise and verification!
 
 

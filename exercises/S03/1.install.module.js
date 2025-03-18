@@ -15,8 +15,8 @@ import { expect } from 'chai';
 
 //// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise and verification!
-expect("Such a wonderful day!").to.be.equal("Such a wonderful day!")
-console.log('Module was imported! Congratulations!')
+expect("Such a wonderful day!").to.be.equal("Such a wonderful day!");
+console.log('Module was imported! Congratulations!');
 
 // Expected output:
 // After running this script on console You should receive:
