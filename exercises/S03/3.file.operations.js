@@ -10,23 +10,16 @@
 
 //// TODO:
 // here place your solution:
+import { writeFileSync, readFileSync } from 'fs';
 
+const dataToFile = 'Hello jaktestowac.pl!';
+writeFileSync('exercises/S03/ex3.txt', dataToFile);
 
+const dataFromFile = readFileSync('exercises/S03/ex3.txt', {encoding:'utf8'});
 
+console.log(dataFromFile);
 
-
-
-
-
-
-
-
-
-
-
-
-
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise and verification!
 
 

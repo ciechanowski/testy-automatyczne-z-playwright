@@ -1,6 +1,6 @@
 // to write to file we need to import methods from fs module:
 import { readFileSync, writeFileSync, appendFileSync } from 'fs'
-// fs module is build in node.js so we dont need to install anything!
+// fs module is build in node.js so we don't need to install anything!
 
 // readFileSync - it is used for synchronous reading from files
 // writeFileSync - it is used for synchronous writing and creation of files
@@ -22,7 +22,7 @@ appendFileSync('theory/S03/new-data-file.txt', sampleData)
 console.log('----------------------------------------------------')
 console.log('Using readFileSync with utf8 to read txt file content:')
 
-// to have readable output we have to add proper enconding:
+// to have readable output we have to add proper encoding:
 const dataFromFileAsUtf8 = readFileSync('theory/S03/new-data-file.txt', {encoding:'utf8'})
 console.log(dataFromFileAsUtf8)
 

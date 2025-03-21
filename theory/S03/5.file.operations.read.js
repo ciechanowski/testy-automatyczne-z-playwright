@@ -1,6 +1,6 @@
 // to read file we need to import methods from fs module:
 import { readFileSync, readFile, writeFileSync } from 'fs'
-// fs module is build in node.js so we dont need to install anything!
+// fs module is build in node.js so we don't need to install anything!
 
 // readFileSync - it is used for synchronous reading from files
 // writeFileSync - it is used for synchronous writing and creation of files
