@@ -9,25 +9,13 @@
 
 //// TODO:
 // here place your solution:
+import { getUserListFromApi } from "./4.async.helpers.js";
 
+const userList = await getUserListFromApi();
+console.log(userList[0]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//// DONT MODIFY CODE BELOW!
+//// DON'T MODIFY CODE BELOW!
 // Here You will find expected result of exercise and verification!
-
 
 
 // Expected output:
