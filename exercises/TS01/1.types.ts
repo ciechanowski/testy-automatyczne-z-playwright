@@ -18,6 +18,19 @@
 
 //// TODO:
 //// -----------------------HERE PLACE YOUR SOLUTION:-------------------------
+let userName: string;
+let userId: number;
+let userNames: string[] = [];
+let userIds: number[] = [];
+
+userName = 'Bob';
+userId = 412;
+
+userNames.push(userName);
+userIds.push(userId);
+
+console.log(userNames);
+console.log(userIds);
 
 //// -----------------------DON'T MODIFY CODE BELOW!-------------------------
 // Here you will find expected result of exercise
