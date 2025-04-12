@@ -23,6 +23,71 @@
 
 //// TODO:
 //// -----------------------HERE PLACE YOUR SOLUTION:-------------------------
+enum HeroActions {
+    Attack,
+    Defend,
+    Move,
+    Rest
+}
+
+function invokeAction(action: HeroActions): string {
+    let actionOutput = "Unknown action"
+    switch (action) {
+        case HeroActions.Attack:
+            actionOutput = "Hero Attacks!";
+            break;
+        case HeroActions.Defend:
+            actionOutput = "Hero Defends!";
+            break;
+        case HeroActions.Move:
+            actionOutput = "Hero got the Moves!";
+            break;
+        case HeroActions.Rest:
+            actionOutput = "Hero Rests!";
+            break;
+        default:
+            break;
+    }
+    return actionOutput;
+}
+
+console.log(invokeAction(HeroActions.Attack));
+console.log(invokeAction(HeroActions.Defend));
+console.log(invokeAction(HeroActions.Move));
+console.log(invokeAction(HeroActions.Rest));
+// console.log(invokeAction(5 as HeroActions));
+
+// enum HeroActions {
+//     Attack,
+//     Defend,
+//     Move,
+//     Rest
+// }
+
+// function invokeAction(action: HeroActions): void {
+//     switch (action) {
+//         case HeroActions.Attack:
+//             console.log("Hero Attacks!");
+//             break;
+//         case HeroActions.Defend:
+//             console.log("Hero Defends!");
+//             break;
+//         case HeroActions.Move:
+//             console.log("Hero got the Moves!");
+//             break;
+//         case HeroActions.Rest:
+//             console.log("Hero Rests!");
+//             break;
+//         default:
+//             console.log("Unknown action");
+//             break;
+//     }
+// }
+
+// invokeAction(HeroActions.Attack);
+// invokeAction(HeroActions.Defend);
+// invokeAction(HeroActions.Move);
+// invokeAction(HeroActions.Rest);
 
 //// -----------------------DON'T MODIFY CODE BELOW!-------------------------
 // Here you will find expected result of exercise
