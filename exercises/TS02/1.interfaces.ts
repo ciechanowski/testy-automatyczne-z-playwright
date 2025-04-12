@@ -17,6 +17,73 @@
 
 //// TODO:
 //// -----------------------HERE PLACE YOUR SOLUTION:-------------------------
+interface UserData {
+    id: number;
+    fullName: string;
+    pass: string;
+    data?: string;
+}
+
+const user1: UserData = {
+    id: 1,
+    fullName: 'John',
+    pass: '1234',
+    data: 'Some data'
+};
+
+const user2: UserData = {
+    id: 2,
+    fullName: 'Bob',
+    pass: '4321'
+};
+
+console.log(user1);
+console.log(user2);
+
+const id1 = user1.id;
+const id2 = user2.id;
+
+console.log(user1);
+console.log(user2);
+
+// interface UserData {
+//     id: number;
+//     fullName: string;
+//     pass: string;
+//     data?: string;
+// }
+
+// const John: UserData = {
+//     id: 1,
+//     fullName: 'John',
+//     pass: '1234',
+//     data: 'Some data'
+// };
+
+// const Bob: UserData = {
+//     id: 2,
+//     fullName: 'Bob',
+//     pass: '4321'
+// };
+
+// console.log(John);
+// console.log(Bob);
+
+// const changeJohn: UserData = {
+//     id: Bob.id,
+//     fullName: 'John',
+//     pass: '1234',
+//     data: 'Some data'
+// };
+
+// const changeBob: UserData = {
+//     id: John.id,
+//     fullName: 'Bob',
+//     pass: '4321'
+// };
+
+// console.log(changeJohn);
+// console.log(changeBob);
 
 //// -----------------------DON'T MODIFY CODE BELOW!-------------------------
 // Here you will find expected result of exercise
