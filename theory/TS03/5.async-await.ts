@@ -27,7 +27,7 @@ console.log("\n--------Using async function in another function--------\n")
 
 // we must use async keyword
 
-// we can use following constuction
+// we can use following construction
 // but we should define returned type!
 async function asyncCall() {
     console.log("calling async function in asyncCall...")
