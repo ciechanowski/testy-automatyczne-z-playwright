@@ -29,6 +29,8 @@ hit twice <kbd>Ctrl</kbd> + <kbd>C</kbd>
 `retries: process.env.CI ? 2 : 2,`
 - retry option for test configuration (in code)  
 `test.describe.configure({ retries: 2 });`
+- add smart wait for page to fully load  
+`await page.waitForLoadState("domcontentloaded");`
 
 ## Playwright Config modifications
 - config file `playwright.config.ts`
