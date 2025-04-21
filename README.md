@@ -1,6 +1,6 @@
 # Test Automation training from jaktestowac.pl
 
-## Lin
+## Links
 
 - course https://jaktestowac.pl/course/playwright-wprowadzenie/
 - test site https://demo-bank.vercel.app/  

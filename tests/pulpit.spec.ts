@@ -1,12 +1,18 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Pulpit tests', () => {
-  test('quick payment with correct data', async ({ page }) => {
-    // Arrange
-    const url = 'https://demo-bank.vercel.app/';
+  test.beforeEach(async ({ page }) => {
     const userId = 'mctester';
     const userPassword = 'kotki123';
 
+    await page.goto('/');
+    await page.getByTestId('login-input').fill(userId);
+    await page.getByTestId('password-input').fill(userPassword);
+    await page.getByTestId('login-button').click();
+  });
+
+  test('quick payment with correct data', async ({ page }) => {
+    // Arrange
     const receiverId = '2';
     const transferAmount = '150';
     const transferTitle = 'pizza';
@@ -14,11 +20,6 @@ test.describe('Pulpit tests', () => {
     const expectedMessage = `Przelew wykonany! ${expectedTransferReceiver} - ${transferAmount},00PLN - ${transferTitle}`;
 
     // Act
-    await page.goto(url);
-    await page.getByTestId('login-input').fill(userId);
-    await page.getByTestId('password-input').fill(userPassword);
-    await page.getByTestId('login-button').click();
-
     await page.waitForLoadState('domcontentloaded');
 
     await page.locator('#widget_1_transfer_receiver').selectOption(receiverId);
@@ -34,20 +35,11 @@ test.describe('Pulpit tests', () => {
 
   test('successful mobile top-up', async ({ page }) => {
     // Arrange
-    const url = 'https://demo-bank.vercel.app/';
-    const userId = 'mctester';
-    const userPassword = 'kotki123';
-
     const topUpReceiver = '500 xxx xxx';
     const topUpAmount = '50';
     const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
 
     // Act
-    await page.goto(url);
-    await page.getByTestId('login-input').fill(userId);
-    await page.getByTestId('password-input').fill(userPassword);
-    await page.getByTestId('login-button').click();
-
     await page.waitForLoadState('domcontentloaded');
 
     await page.locator('#widget_1_topup_receiver').selectOption(topUpReceiver);
