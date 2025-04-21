@@ -63,7 +63,7 @@
 - Preview: for README.md
 - Autosave: in File -> Auto Save
 - Timeline: file context menu -> Open Timeline
-- Formatting: editor -> context menu -> Format Document
+- Formatting: editor -> context menu -> Format Document -> <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>F</kbd>
 - Searching: editor -> <kbd>CTRL</kbd> + <kbd>F</kbd>
 - Accept hint in editor: <kbd>Enter</kbd>
 - Comment/Uncomment: <kbd>Ctrl</kbd> + <kbd>/</kbd>
