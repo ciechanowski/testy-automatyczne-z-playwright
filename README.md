@@ -23,14 +23,23 @@ if link is broken check https://jaktestowac.pl/lesson/pw1s01l01/
 hit twice <kbd>Ctrl</kbd> + <kbd>C</kbd>
 - run tests multiple times using repeat-each option  
 `npx playwright test --repeat-each=10`
-- retry option when running tests  
-`npx playwright test --retries=3`
-- retry option in playwright.config.ts  
-`retries: process.env.CI ? 2 : 2,`
-- retry option for test configuration (in code)  
-`test.describe.configure({ retries: 2 });`
-- add smart wait for page to fully load  
-`await page.waitForLoadState("domcontentloaded");`
+    - retry option when running tests  
+    `npx playwright test --retries=3`
+    - retry option in playwright.config.ts  
+    `retries: process.env.CI ? 2 : 2,`
+    - retry option for test configuration (in code)  
+    `test.describe.configure({ retries: 2 });`
+    - add smart wait for page to fully load  
+    `await page.waitForLoadState("domcontentloaded");`
+### Updating Playwright
+- check if Playwright should be updated  
+`npm outdated @playwright/test` 
+- update Playwright  
+`npm i @playwright/test`
+- update browsers  
+`npx playwright install`
+- verify Playwright version  
+`npx @playwright/test --version`
 
 ## Playwright Config modifications
 - config file `playwright.config.ts`
