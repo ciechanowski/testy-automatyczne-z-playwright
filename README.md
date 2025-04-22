@@ -146,7 +146,7 @@
   `npm install --save-dev --save-exact prettier`
 - configure Prettier
 
-  - exlude files in `.prettierignore`
+  - exclude files in `.prettierignore`
 
     ```
     package-lock.json
