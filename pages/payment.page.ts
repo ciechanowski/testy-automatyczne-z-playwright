@@ -24,4 +24,17 @@ export class PaymentPage {
 
     this.messageText = this.page.locator('#show_messages');
   }
+
+  async makeTransfer(
+    transferReceiver: string,
+    transferAccount: string,
+    transferAmount: string,
+  ): Promise<void> {
+    await this.transferReceiverInput.fill(transferReceiver);
+    await this.transferAccountInput.fill(transferAccount);
+    await this.transferAmountInput.fill(transferAmount);
+
+    await this.transferButton.click();
+    await this.actionCloseButton.click();
+  }
 }
