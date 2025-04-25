@@ -165,6 +165,6 @@
 
 - run Prettier  
   `npx prettier --write .`
-- additionaly you can install VSC extension: **Prettier**
+- additionally you can install VSC extension: **Prettier**
 - Prettier Options  
   https://prettier.io/docs/options
