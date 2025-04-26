@@ -37,7 +37,7 @@ test.describe('User login to Demobank', () => {
 
   test(
     'unsuccessful login too short username',
-    { tag: '@login' },
+    { tag: ['@login', '@unhappy_path'] },
     async ({ page }) => {
       // Arrange
       const incorrectUserId = 'tester';
@@ -54,7 +54,7 @@ test.describe('User login to Demobank', () => {
 
   test(
     'unsuccessful login too short password',
-    { tag: '@login' },
+    { tag: ['@login', '@unhappy_path'] },
     async ({ page }) => {
       // Arrange
       const userId = loginData.userId;
