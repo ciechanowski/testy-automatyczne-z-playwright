@@ -1,4 +1,5 @@
-import { test, expect, type Page } from '@playwright/test';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { test, expect, type Page, JSHandle } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://demo.playwright.dev/todomvc');
@@ -213,12 +214,12 @@ test.describe('Editing', () => {
   test('should hide other controls when editing', async ({ page }) => {
     const todoItem = page.getByTestId('todo-item').nth(1);
     await todoItem.dblclick();
-    await expect(todoItem.getByRole('checkbox')).not.toBeVisible();
+    await expect(todoItem.getByRole('checkbox')).toBeHidden();
     await expect(
       todoItem.locator('label', {
         hasText: TODO_ITEMS[1],
       }),
-    ).not.toBeVisible();
+    ).toBeHidden();
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
@@ -481,7 +482,10 @@ async function checkNumberOfCompletedTodosInLocalStorage(
   }, expected);
 }
 
-async function checkTodosInLocalStorage(page: Page, title: string) {
+async function checkTodosInLocalStorage(
+  page: Page,
+  title: string,
+): Promise<JSHandle> {
   return await page.waitForFunction((t) => {
     return (
       JSON.parse(localStorage['react-todos'])
