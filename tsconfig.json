@@ -4,6 +4,6 @@
     "strict": true,
     "module": "CommonJS",
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   }
 }
