@@ -41,7 +41,7 @@ test.describe('Verify menu main buttons', () => {
   );
 
   test(
-    'homepage button navigates to main page',
+    'home page button navigates to main page',
     { tag: '@GAD-R01-03' },
     async ({ page }) => {
       // Arrange
