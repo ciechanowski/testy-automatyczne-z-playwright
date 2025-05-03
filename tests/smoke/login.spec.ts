@@ -18,10 +18,10 @@ test.describe('Verify login', () => {
       await loginPage.login(userEmail, userPassword);
 
       const welcomePage = new WelcomePage(page);
-      const title = await welcomePage.title();
+      const titleWelcome = await welcomePage.title();
 
       // Assert
-      expect(title).toContain('Welcome');
+      expect(titleWelcome).toContain('Welcome');
     },
   );
 
@@ -42,8 +42,8 @@ test.describe('Verify login', () => {
       await expect
         .soft(loginPage.loginError)
         .toHaveText('Invalid username or password');
-      const title = await loginPage.title();
-      expect.soft(title).toContain('Login');
+      const titleLogin = await loginPage.title();
+      expect.soft(titleLogin).toContain('Login');
     },
   );
 });
