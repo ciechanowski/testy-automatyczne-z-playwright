@@ -37,6 +37,12 @@ Run all test with tags:
 npx playwright test --grep "@GAD-R01-02"
 ```
 
+Run test with tags several times:
+
+```
+npx playwright test --grep "@GAD-R03-01" --repeat-each=5
+```
+
 Run all test without tags:
 
 ```
