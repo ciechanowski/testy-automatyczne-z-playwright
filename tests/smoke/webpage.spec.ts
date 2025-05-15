@@ -18,13 +18,13 @@ test.describe('Verify service main pages', () => {
 
   test('articles page title', { tag: '@GAD-R01-02' }, async ({ page }) => {
     // Arrange
-    const articlePage = new ArticlesPage(page);
+    const articlesPage = new ArticlesPage(page);
 
     // Act
-    await articlePage.goto();
+    await articlesPage.goto();
 
     // Assert
-    const title = await articlePage.title();
+    const title = await articlesPage.title();
     expect(title).toContain('Articles');
   });
 
