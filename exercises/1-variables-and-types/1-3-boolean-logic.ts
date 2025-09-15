@@ -23,3 +23,5 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const isTester = true
+console.log(`Am I tester? ${isTester}`)

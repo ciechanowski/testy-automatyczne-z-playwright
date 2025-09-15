@@ -26,3 +26,8 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+let favoriteColor = "blue"
+console.log(`Original color: ${favoriteColor}`)
+
+favoriteColor = "green"
+console.log(`New color: ${favoriteColor}`)

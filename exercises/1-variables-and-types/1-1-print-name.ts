@@ -23,3 +23,5 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const name = "Michał"
+console.log(`My name is ${name}`)
