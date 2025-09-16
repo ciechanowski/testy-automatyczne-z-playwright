@@ -26,3 +26,8 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const username = "Aga"
+const score = 88
+const isOnline = true
+console.log(username + " has " + score + " points. Online: " + isOnline)
+console.log(`${username} has ${score} points. Online: ${isOnline}`)

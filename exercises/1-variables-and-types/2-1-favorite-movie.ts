@@ -25,3 +25,6 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const favoriteMovie = "Interstellar"
+console.log("My favorite movie is " + favoriteMovie)
+console.log(`My favorite movie is ${favoriteMovie}`)

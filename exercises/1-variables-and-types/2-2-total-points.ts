@@ -25,3 +25,6 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const totalPoints = 42
+console.log("You scored " + totalPoints + " points!")
+console.log(`You scored ${totalPoints} points!`)

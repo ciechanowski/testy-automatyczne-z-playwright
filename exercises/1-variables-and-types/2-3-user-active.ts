@@ -25,3 +25,6 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const isActive = true
+console.log("Is user active? " + isActive)
+console.log(`Is user active? ${isActive}`)
