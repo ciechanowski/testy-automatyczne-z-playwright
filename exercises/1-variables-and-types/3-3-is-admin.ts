@@ -26,3 +26,6 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const isAdmin = true
+console.log("Admin access: " + isAdmin)
+console.log(`Admin access: ${isAdmin}`)

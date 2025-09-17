@@ -26,3 +26,6 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const language = "TypeScript"
+console.log("My favorite language is " + language)
+console.log(`My favorite language is ${language}`)

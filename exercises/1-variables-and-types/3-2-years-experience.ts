@@ -26,3 +26,6 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const years = 3
+console.log("I have " + years + " years of experience")
+console.log(`I have ${years} years of experience`)
