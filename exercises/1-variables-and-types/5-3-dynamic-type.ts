@@ -26,3 +26,9 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+let mystery: any
+mystery = "Hello"
+console.log("Type of mystery: " + typeof mystery)
+
+mystery = 42
+console.log("Now the type of mystery: " + typeof mystery)

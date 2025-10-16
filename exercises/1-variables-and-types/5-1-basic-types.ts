@@ -25,3 +25,8 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const message = "Hello, TypeScript!"
+const score = 42
+
+console.log("Type of message:", typeof message)
+console.log("Type of score:", typeof score)

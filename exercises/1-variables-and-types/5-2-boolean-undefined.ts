@@ -25,3 +25,8 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const isDone = true
+let notSet: any
+
+console.log("Type of isDone: " + typeof isDone)
+console.log("Type of notSet: " + typeof notSet)
