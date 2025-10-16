@@ -30,3 +30,15 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const a = 10
+const b = 5
+
+const sum = a + b
+const difference = a - b
+const product = a * b
+const quotient = a / b
+
+console.log("Sum: " + sum)
+console.log("Difference: " + difference)
+console.log("Product: " + product)
+console.log("Quotient: " + quotient)

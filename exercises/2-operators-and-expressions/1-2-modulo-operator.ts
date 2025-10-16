@@ -25,3 +25,8 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const dividend = 17
+const divisor = 5
+
+const remainder = dividend % divisor
+console.log(`The remainder of ${dividend} divided by ${divisor} is ${remainder}`)
