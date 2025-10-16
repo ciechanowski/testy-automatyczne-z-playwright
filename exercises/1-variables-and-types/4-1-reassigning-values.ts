@@ -29,3 +29,13 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+let item: any
+
+item = "Book"
+console.log("Item (string): " + item)
+
+item = 123
+console.log("Item (number): " + item)
+
+item = true
+console.log("Item (boolean): " + item)

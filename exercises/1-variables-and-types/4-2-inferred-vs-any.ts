@@ -29,3 +29,9 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+let inferredText = "Hello"
+// inferredText = 42
+
+let anyText: any
+anyText = "Hello"
+anyText = 42
