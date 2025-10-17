@@ -23,3 +23,9 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const number = -7.8
+const absoluteValue = Math.abs(number)
+const roundedValue = Math.round(number)
+
+console.log("Absolute value: " + absoluteValue)
+console.log("Rounded value: " + roundedValue)

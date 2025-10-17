@@ -43,3 +43,24 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const value = -3.7
+
+const absValue = Math.abs(value)
+const ceilValue = Math.ceil(value)
+const floorValue = Math.floor(value)
+const powerValue = Math.pow(2, 5)
+const sqrtValue = Math.sqrt(81)
+const minValue = Math.min(10, value, 25, 0)
+const maxValue = Math.max(10, value, 25, 0)
+const randomValue = Math.floor(Math.random() * 10) + 1
+const signValue = Math.sign(value)
+
+console.log("Absolute: " + absValue)
+console.log("Ceil: " + ceilValue)
+console.log("Floor: " + floorValue)
+console.log("Power: " + powerValue)
+console.log("Sqrt: " + sqrtValue)
+console.log("Min: " + minValue)
+console.log("Max: " + maxValue)
+console.log("Random: " + randomValue)
+console.log("Sign: " + signValue)
