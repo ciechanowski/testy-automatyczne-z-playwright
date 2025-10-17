@@ -34,3 +34,17 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+let score = 10
+console.log("Initial score: " + score)
+
+score += 5
+console.log("After adding 5: " + score)
+
+score -= 3
+console.log("After subtracting 3: " + score)
+
+score *= 2
+console.log("After multiplying by 2: " + score)
+
+score /= 4
+console.log("After dividing by 4: " + score)
