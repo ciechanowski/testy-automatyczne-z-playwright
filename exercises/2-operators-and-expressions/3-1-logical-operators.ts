@@ -28,3 +28,13 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const isLoggedIn = true
+const hasPermission = false
+
+const canAccess = isLoggedIn || hasPermission
+const canEdit = isLoggedIn && hasPermission
+const isNotLoggedIn = !isLoggedIn 
+
+console.log("Can access: " + canAccess)
+console.log("Can edit: " + canEdit)
+console.log("Is not logged in: " + isNotLoggedIn)
