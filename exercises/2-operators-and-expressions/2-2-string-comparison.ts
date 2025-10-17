@@ -30,3 +30,11 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const name1: string = "Alice"
+const name2: string = "Bob"
+
+const areEqual = name1 === name2
+const areDifferent = name1 !== name2
+
+console.log("Names are equal: " + areEqual)
+console.log("Names are different: " + areDifferent)

@@ -30,3 +30,15 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const x = 15
+const y = 10
+
+const greater = x > y 
+const less = x < y
+const greaterOrEqual = x >= y
+const lessOrEqual = x <= y
+
+console.log("x > y: " + greater)
+console.log("x < y: " + less)
+console.log("x >= y: " + greaterOrEqual)
+console.log("x <= y: " + lessOrEqual)
