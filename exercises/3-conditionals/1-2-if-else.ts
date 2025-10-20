@@ -28,3 +28,14 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+let temperature = 20
+
+if (temperature < 0) {
+    console.log("It's freezing!")
+} else if (temperature <= 15) {
+    console.log("It's cold")
+} else if (temperature <= 25) {
+    console.log("It's pleasant")
+} else {
+    console.log("It's hot!")
+}
