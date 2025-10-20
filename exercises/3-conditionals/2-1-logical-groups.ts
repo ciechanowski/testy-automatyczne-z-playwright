@@ -25,3 +25,14 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+let isStudent = true
+let hasDiscount = false
+let age = 18
+
+const canGetDiscount = isStudent || hasDiscount && age >= 16
+
+if (canGetDiscount) {
+    console.log("You can get a discount")
+} else {
+  console.log("You cannot get a discount")
+} 
