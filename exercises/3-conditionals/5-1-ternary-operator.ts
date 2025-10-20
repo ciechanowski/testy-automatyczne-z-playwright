@@ -26,3 +26,7 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const score = 75
+const result = score >= 75 ? "Pass" : "Fail"
+
+console.log(result)
