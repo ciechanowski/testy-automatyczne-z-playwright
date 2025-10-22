@@ -27,7 +27,7 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
-let fruits: string[] = ["apple", "banana", "orange"]
+const fruits = ["apple", "banana", "orange"]
 
 const firstFruit = fruits[0]
 const lastFruit = fruits[fruits.length - 1]
