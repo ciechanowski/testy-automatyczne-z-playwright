@@ -26,3 +26,8 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const animals = ["dog", "cat", "bird"]
+
+for (const animal of animals) {
+    console.log(`I like ${animal}`)
+}

@@ -27,3 +27,8 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const colors = ["red", "green", "blue"]
+
+for (let i = 0; i < colors.length; i++) {
+    console.log(`Color ${i}: ${colors[i]}`)
+}
