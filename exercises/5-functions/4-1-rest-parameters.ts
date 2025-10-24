@@ -60,3 +60,18 @@ const buildSentence = (...words: string[]): string => {
 // -------------------------
 
 // 👇 Your code here 👇 
+function sumAll(...numbers: number[]) {
+    let total = 0
+    for (const n of numbers) {
+        total += n
+    }
+    return total
+}
+const sum = sumAll(10, 20, 30, 40, 50) 
+console.log("Sum of all numbers: " + sum) 
+
+const totalCost = calculateTotal(15.99, 24.5, 8.75) 
+console.log("Total cost: $" + totalCost.toFixed(2))
+
+const sentence = buildSentence("TypeScript", "is", "awesome") 
+console.log("Sentence: " + sentence) 
