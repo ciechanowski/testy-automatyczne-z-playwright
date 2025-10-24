@@ -25,3 +25,15 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+// function greet(name: string) {
+//     console.log("Hello, " + name + "!")
+// }
+
+// greet("Alice")
+
+function greet(name: string): string {
+  return "Hello, " + name + "!"
+}
+
+const message = greet("Alice") 
+console.log(message) 

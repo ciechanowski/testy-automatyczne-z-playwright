@@ -51,3 +51,11 @@ const findMax = (...values: number[]): number => {
 // -------------------------
 
 // 👇 Your code here 👇 
+const avg = calculateAverage(85, 92, 78, 96)
+console.log("Average score: " + avg)
+
+const fullName = createFullName("Dr.", "John", "Smith", "Jr.")
+console.log("Full name: " + fullName)
+
+const max = findMax(23, 45, 12, 67, 34)
+console.log("Highest number: " + max)
