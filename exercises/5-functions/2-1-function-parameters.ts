@@ -26,3 +26,9 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+function calculateArea(width: number, height: number) {
+    return width * height
+}
+
+const area = calculateArea(5, 3)
+console.log(`The area is ${area} square units`)
