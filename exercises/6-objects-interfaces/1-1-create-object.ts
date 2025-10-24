@@ -26,3 +26,11 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const person = {
+    name: "John",
+    age: 25,
+    city: "New York"
+}
+
+const message = `Hello, my name is ${person.name} and I'm ${person.age} years old`
+console.log(message)

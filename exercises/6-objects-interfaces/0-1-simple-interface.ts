@@ -25,3 +25,9 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+interface Pet { 
+  name: string 
+}
+
+const myPet: Pet = { name: "Fluffy" } 
+console.log("My pet's name is " + myPet.name) 
