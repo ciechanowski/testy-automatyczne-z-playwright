@@ -25,4 +25,10 @@ export {} // Ignore this line
 // "Double of 7 is 14"
 // -------------------------
 
-// 👇 Your code here 👇 
+// 👇 Your code here 👇  
+const double = (num: number) => {
+    return num * 2
+}
+
+const result = double(7)
+console.log(`Double of 7 is ${result}`)
