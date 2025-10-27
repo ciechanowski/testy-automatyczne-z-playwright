@@ -26,3 +26,15 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const car = {
+    brand: "Toyota",
+    model: "Camry",
+    year: 2020
+}
+
+const brand = car.brand 
+const model = car["model"] 
+const year = car["year"]
+const message = `I drive a ${year} ${brand} ${model}`
+
+console.log(message)
