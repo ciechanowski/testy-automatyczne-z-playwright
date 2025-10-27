@@ -27,3 +27,17 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+interface User {
+    id: number,
+    name: string,
+    email: string
+}
+
+function displayUser(user: User) {
+    const message = `User ${user.id}: ${user.name} (${user.email})`
+    console.log(message)
+}
+
+const user: User = { id: 1, name: "Alice", email: "alice@example.com" }
+
+displayUser(user)
