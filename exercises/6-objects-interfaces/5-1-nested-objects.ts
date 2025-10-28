@@ -32,3 +32,19 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const user = {
+    name: "John",
+    address: {
+        street: "123 Main St",
+        city: "New York",
+        country: "USA"
+    },
+    preferences: {
+        theme: "dark",
+        notifications: true
+    }
+}
+
+console.log("User: " + user.name)
+console.log("Street: " + user.address.street)
+console.log("Theme: " + user.preferences.theme)
