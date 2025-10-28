@@ -26,3 +26,18 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+type Status = "active" | "inactive" | "pending"
+
+interface Account {
+    id: number
+    name: string
+    status: Status
+}
+
+const account: Account = {
+    id: 123,
+    name: "John Doe",
+    status: "active"
+}
+
+console.log(`Account ${account.id}: ${account.name} is ${account.status}`)
