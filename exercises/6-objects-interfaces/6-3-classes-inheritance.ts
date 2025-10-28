@@ -14,3 +14,24 @@ export {}
 // "Woof!"
 
 // 👇 Your code here 👇
+class Animal {
+    protected species: string
+
+    constructor(species: string) {
+        this.species = species 
+    }
+
+    describe(): string {
+        return `This is a ${this.species}`
+    }
+}
+
+class Dog extends Animal {
+    bark(): string {
+        return "Woof!"
+    }
+}
+
+const dog = new Dog("dog")
+console.log(dog.describe())
+console.log(dog.bark())

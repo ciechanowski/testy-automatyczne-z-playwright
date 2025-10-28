@@ -15,3 +15,29 @@ export {}
 // "counter-1"
 
 // 👇 Your code here 👇
+class Counter {
+    private count: number = 0
+
+    readonly id: string
+
+    constructor(id: string) {
+        this.id = id
+    }
+
+    increment(): void {
+        this.count += 1 
+    }
+
+    getCount(): number {
+        return this.count
+    }
+}
+
+const counter = new Counter("counter-1")
+
+counter.increment()
+counter.increment()
+counter.increment()
+
+console.log(counter.getCount())
+console.log(counter.id)
