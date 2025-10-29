@@ -38,3 +38,9 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+import { add, multiply, power, PI } from "./math-utils"
+
+const result = multiply(add(5, 3), power(2, 3))
+
+console.log("Result: " + result)
+console.log("PI value: " + PI) 

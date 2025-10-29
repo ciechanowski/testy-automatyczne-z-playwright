@@ -37,3 +37,13 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+import { capitalize, reverse, isPalindrome } from "./string-utils" 
+
+const cap = capitalize("hello world") 
+console.log("Capitalized: " + cap)
+
+const rev = reverse("TypeScript") 
+console.log("Reversed: " + rev)
+
+const palindromeResult = isPalindrome("racecar") 
+console.log("Is 'racecar' a palindrome? " + palindromeResult)
