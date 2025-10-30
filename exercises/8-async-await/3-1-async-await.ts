@@ -27,3 +27,14 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+function delay() {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100)
+  })
+}
+async function processData() { 
+  console.log("Processing...") 
+  await delay() 
+  console.log("Done!") 
+}
+processData() 
