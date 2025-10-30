@@ -29,3 +29,17 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+import { promises as fs } from "fs"
+
+async function readAndWriteFile() {
+    try {
+        await fs.writeFile("test.txt", "Hello from Node.js!") 
+        const content = await fs.readFile("test.txt", "utf8") 
+        console.log("File content: " + content) 
+        console.log("File operations completed successfully!")
+    } catch (error: any) {
+        console.log("Error: " + error.message)
+    }
+}
+
+readAndWriteFile()
