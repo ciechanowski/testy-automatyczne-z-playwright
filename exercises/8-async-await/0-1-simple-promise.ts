@@ -56,3 +56,14 @@ const fetchUserData = new Promise((resolve, reject) => {
 // -------------------------
 
 // 👇 Your code here 👇 
+fetchUserData
+  .then((user: any) => { 
+    console.log("User data received: " + user.name) 
+  })
+  .catch((error) => { 
+    console.log("Error: " + error) 
+  })
+  .finally(() => { 
+    console.log("Promise completed!")
+  }) 
+  

@@ -25,3 +25,11 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+async function fetchData() { 
+  return new Promise((resolve) => { 
+    resolve("Data fetched successfully!") 
+  })
+}
+fetchData().then((result) => { 
+  console.log(result) 
+}) 
