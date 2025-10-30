@@ -26,3 +26,23 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+function riskyOperation() {
+    return new Promise((resolve, reject) => {
+        if (Math.random() > 0.5) {
+            resolve("Success!")
+        } else {
+            reject(new Error("Something went wrong!"))
+        }
+    })
+}
+
+async function handleRiskyOperation() {
+    try {
+        const result = await riskyOperation()
+        console.log(result)
+    } catch (error: any) {
+        console.log("Error: " + error.message)
+    }
+}
+
+handleRiskyOperation()
