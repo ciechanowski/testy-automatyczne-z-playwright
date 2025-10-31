@@ -27,3 +27,21 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+type Status = "loading" | "success" | "error" 
+
+function getStatusMessage(status: Status): string {
+    switch (
+        status 
+    ) {
+        case "loading":
+            return "Please wait..."
+        case "success":
+            return "Operation completed successfully!"
+        case "error":
+            return "Something went wrong!"
+    }
+}
+
+console.log(getStatusMessage("loading"))
+console.log(getStatusMessage("success"))
+console.log(getStatusMessage("error"))

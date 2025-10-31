@@ -24,3 +24,7 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+type Answer = 'yes' | 'no'
+let userAnswer: Answer = 'yes'
+
+console.log("User answered: " + userAnswer) 
