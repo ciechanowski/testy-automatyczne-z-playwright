@@ -27,3 +27,17 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+enum Direction {
+    North, 
+    South, 
+    East, 
+    West
+}
+
+let currentDirection: Direction = Direction.North
+
+function getDirection(direction: Direction) {
+    return "You are heading " + Direction[direction]
+}
+
+console.log(getDirection(currentDirection))

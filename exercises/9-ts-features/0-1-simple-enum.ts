@@ -25,3 +25,10 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+enum Season {
+    Summer,
+    Winter
+}
+
+let currentSeason: Season = Season.Summer
+console.log("Current season is " + Season[currentSeason])
