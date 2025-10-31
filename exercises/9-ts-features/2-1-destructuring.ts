@@ -25,3 +25,9 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const point = { x: 10, y: 20 }
+const { x, y } = point 
+
+const message = `Point coordinates: x=${x}, y=${y}` 
+
+console.log(message) 

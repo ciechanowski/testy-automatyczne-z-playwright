@@ -1,6 +1,8 @@
 // 🧪 Exercise 0.2: Simple Destructuring (Beginner Friendly)
 // This exercise will help you understand what destructuring is in simple terms.
 
+import { userInfo } from "os"
+
 // -------------------------
 // ✅ Exercise: Simple Destructuring ✅
 // -------------------------
@@ -24,3 +26,6 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇 
+const person = { name: "Alice" } 
+const { name } = person 
+console.log("Hello, " + name) 
