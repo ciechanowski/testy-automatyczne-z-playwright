@@ -41,3 +41,42 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+type TestInput = string | number | boolean
+
+function processTestInput(input: TestInput): string {
+    if (typeof input === "string") {
+        return "Text input: " + input
+    } else if (typeof input === "number") {
+        return "Numeric input: " + input
+    } else if (typeof input === "boolean") {
+        return "Boolean input: " + input
+    } else {
+        return "Unknown input type"
+    }
+}
+
+type TestResult = "pass" | "fail" | "skip"
+
+function getResultMessage(result: TestResult): string {
+    switch (result) {
+        case "pass":
+            return "✅ Test passed successfully"
+        case "fail":
+            return "❌ Test failed"
+        case "skip":
+            return "⏭️ Test was skipped"
+        default:
+            return "Unknown result"
+    }
+}
+
+console.log(getResultMessage("pass"))
+console.log(getResultMessage("fail"))
+
+let userId: string | number
+
+userId = "user_123"
+console.log(userId)
+
+userId = 12345
+console.log(userId)
