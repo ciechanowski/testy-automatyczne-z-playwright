@@ -36,3 +36,38 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+enum Operation {
+    Add, 
+    Subtract, 
+    Multiply
+}
+
+function add(a: number, b: number): number {
+    return a + b
+}
+
+function subtract(a: number, b: number): number {
+    return a - b
+}
+
+function multiply(a: number, b: number): number {
+    return a * b
+}
+
+function calculate(operation: Operation, num1: number, num2: number): number {
+    switch (operation) {
+        case Operation.Add:
+            return add(num1, num2)
+        case Operation.Subtract:
+            return subtract(num1, num2)
+        case Operation.Multiply:
+            return multiply(num1, num2)
+        default:
+            return 0
+    }
+}
+
+console.log(calculate(Operation.Add, 5, 3))
+console.log(calculate(Operation.Subtract, 10, 4))
+console.log(calculate(Operation.Multiply, 7, 3)) 
+console.log(calculate(Operation.Add, 12, 8)) 

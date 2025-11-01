@@ -40,3 +40,51 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+enum Operation {
+    Add, 
+    Subtract, 
+    Multiply,
+    Divide
+}
+
+function add(a: number, b: number): number {
+    return a + b
+}
+
+function subtract(a: number, b: number): number {
+    return a - b
+}
+
+function multiply(a: number, b: number): number {
+    return a * b
+}
+
+function divide(a: number, b: number): number {
+    if (b === 0) {
+        console.log("Division by zero!")
+        return 0
+    }
+    return a / b
+}
+
+
+function calculate(operation: Operation, num1: number, num2: number): number {
+    switch (operation) {
+        case Operation.Add:
+            return add(num1, num2)
+        case Operation.Subtract:
+            return subtract(num1, num2)
+        case Operation.Multiply:
+            return multiply(num1, num2)
+        case Operation.Divide:
+            return divide(num1, num2)
+        default:
+            return 0
+    }
+}
+
+console.log(calculate(Operation.Add, 5, 3))
+console.log(calculate(Operation.Subtract, 10, 4))
+console.log(calculate(Operation.Multiply, 7, 3)) 
+console.log(calculate(Operation.Divide, 15, 3)) 
+console.log(calculate(Operation.Divide, 10, 0)) 

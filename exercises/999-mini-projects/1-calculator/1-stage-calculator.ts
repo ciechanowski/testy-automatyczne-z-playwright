@@ -28,3 +28,16 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+function add(a: number, b: number): number {
+    return a + b
+}
+
+function calculate(operation: string, num1: number, num2: number): number {
+    if (operation === "add") {
+        return add(num1, num2)
+    }
+    return 0
+}
+
+console.log(calculate("add", 5, 3)) 
+console.log(calculate("add", 10, 7))

@@ -78,3 +78,82 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+enum Operation {
+    Add,
+    Subtract,
+    Multiply,
+    Divide
+}
+
+class Calculator {
+    private history: string[] = []
+    private memory: number = 0
+
+    add(a: number, b: number): number {
+        const result = a + b
+        this.history.push(`${Operation[Operation.Add]}: ${a} + ${b} = ${result}`)
+        return result
+    }
+
+    subtract(a: number, b: number): number {
+        const result = a - b
+        this.history.push(`${Operation[Operation.Subtract]}: ${a} - ${b} = ${result}`)
+        return result
+    }
+
+    multiply(a: number, b: number): number {
+        const result = a * b
+        this.history.push(`${Operation[Operation.Multiply]}: ${a} * ${b} = ${result}`)
+        return result
+    }
+
+    divide(a: number, b: number): number {
+        if (b === 0) {
+            console.log("Division by zero!")
+            return 0
+        }
+        const result = a / b
+        this.history.push(`${Operation[Operation.Divide]}: ${a} / ${b} = ${result}`)
+        return result
+    }
+
+    storeInMemory(value: number): void {
+        this.memory = value
+    }
+
+    recallMemory(): number {
+        return this.memory
+    }
+
+    clearMemory(): void {
+        this.memory = 0
+    }
+
+    getHistory(): string[] {
+        return this.history
+    }
+}
+
+const calc = new Calculator()
+
+console.log(calc.add(5, 3)) 
+console.log(calc.getHistory()) 
+
+calc.storeInMemory(10) 
+console.log(calc.recallMemory()) 
+
+const memoryValue = calc.recallMemory() 
+calc.multiply(memoryValue, 2) 
+console.log(calc.getHistory()) 
+
+calc.subtract(10, 4) 
+console.log(calc.getHistory()) 
+
+calc.divide(10, 0) 
+
+calc.clearMemory() 
+const result = calc.add(5, 3) 
+console.log(result) 
+calc.storeInMemory(result)
+calc.multiply(calc.recallMemory(), 2)
+console.log(calc.getHistory()) 
