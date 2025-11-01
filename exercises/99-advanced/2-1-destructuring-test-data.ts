@@ -40,3 +40,29 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+const testResults = [true, false, true, true, false]
+
+const [first, second, , , last] = testResults
+
+console.log(`First test: ${first}, Second test: ${second}, Last test: ${last}`)
+
+const testReport = {
+    testName: "Login Test",
+    duration: 2.5,
+    status: "passed",
+    errors: 0
+}
+
+const { testName, status } = testReport
+
+console.log(`Test: ${testName}, Status: ${status}`)
+
+const { duration: testTime } = testReport
+
+console.log(`Test duration: ${testTime} seconds`)
+
+function summarizeTest({ testName, status, duration }: { testName: string; status: string; duration: number }): string {
+    return `${testName} (${status}) completed in ${duration}s`
+}
+
+console.log(summarizeTest(testReport))
