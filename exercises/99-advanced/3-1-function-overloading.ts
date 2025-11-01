@@ -42,3 +42,35 @@ export {} // Ignore this line
 // -------------------------
 
 // 👇 Your code here 👇
+function assert(condition: boolean): void
+function assert(condition: boolean, message: string): void
+
+function assert(condition: boolean, message?: string): void {
+    if (!condition) {
+        const errorMessage = message || "Assertion failed"
+        throw new Error(errorMessage)
+    } else {
+        console.log("Assertion passed")
+    }
+}
+
+function compare(a: string, b: string): boolean
+function compare(a: number, b: number): boolean
+
+function compare(a: string | number, b: string | number): boolean {
+    return a === b
+}
+
+console.log("Testing assert function:")
+
+assert(true)
+
+try {
+    assert(false, "Expected value to be true")
+} catch (error) {
+    console.log("Error:", (error as Error).message)
+}
+
+console.log("Testing compare function:")
+console.log(compare("hello", "hello")) 
+console.log(compare(42, 24)) 
