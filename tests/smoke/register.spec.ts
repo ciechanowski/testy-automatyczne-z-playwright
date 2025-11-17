@@ -1,5 +1,5 @@
-import { randomUserData } from '../../src/factories/user.factory';
-import { RegisterUser } from '../../src/models/user.model';
+import { prepareRandomUser } from '../../src/factories/user.factory';
+import { RegisterUserModel } from '../../src/models/user.model';
 import { LoginPage } from '../../src/pages/login.page';
 import { RegisterPage } from '../../src/pages/register.page';
 import { WelcomePage } from '../../src/pages/welcome.page';
@@ -7,11 +7,11 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Verify register', () => {
   let registerPage: RegisterPage;
-  let registerUserData: RegisterUser;
+  let registerUserData: RegisterUserModel;
 
   test.beforeEach(async ({ page }) => {
     registerPage = new RegisterPage(page);
-    registerUserData = randomUserData();
+    registerUserData = prepareRandomUser();
     await registerPage.goto();
   });
   test(
@@ -19,6 +19,8 @@ test.describe('Verify register', () => {
     { tag: ['@GAD-R03-01', '@GAD-R03-02', '@GAD-R03-03'] },
     async ({ page }) => {
       // Arrange
+      const expectedLoginTitle = 'Login';
+      const expectedWelcomeTitle = 'Welcome';
       const expectedAlertPopupText = 'User created';
 
       const loginPage = new LoginPage(page);
@@ -31,8 +33,8 @@ test.describe('Verify register', () => {
       await expect(registerPage.alertPopup).toHaveText(expectedAlertPopupText);
 
       await loginPage.waitForPageToLoadUrl();
-      const titleLogin = await loginPage.title();
-      expect.soft(titleLogin).toContain('Login');
+      const titleLogin = await loginPage.getTitle();
+      expect.soft(titleLogin).toContain(expectedLoginTitle);
 
       // Assert test login
       await loginPage.login({
@@ -40,8 +42,8 @@ test.describe('Verify register', () => {
         userPassword: registerUserData.userPassword,
       });
 
-      const titleWelcome = await welcomePage.title();
-      expect(titleWelcome).toContain('Welcome');
+      const titleWelcome = await welcomePage.getTitle();
+      expect(titleWelcome).toContain(expectedWelcomeTitle);
     },
   );
 
