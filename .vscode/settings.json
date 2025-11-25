@@ -4,5 +4,6 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "cSpell.words": ["trivago"]
+  "cSpell.words": ["trivago"],
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

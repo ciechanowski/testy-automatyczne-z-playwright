@@ -4,6 +4,12 @@
     "strict": true,
     "module": "CommonJS",
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@_src/*": ["src/*"],
+      "@_pw-config": ["playwright.config.ts"]
+    },
+    "ignoreDeprecations": "5.0"
   }
 }

@@ -1,4 +1,4 @@
-import { STORAGE_STATE } from '../playwright.config';
+import { STORAGE_STATE } from '@_pw-config';
 import * as fs from 'fs';
 
 async function globalSetup(): Promise<void> {
@@ -7,7 +7,7 @@ async function globalSetup(): Promise<void> {
   }
 
   // console.log('⚠️  URL:', process.env.BASE_URL);
-  // console.log('⚠️ Global setup');
+  // console.log('⚠️  Global setup');
 }
 
 export default globalSetup;
