@@ -5,8 +5,13 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default [
+  // Ignored files
   { ignores: ['package-lock.json', 'playwright-report/**', 'test-results/**'] },
+
+  // TS files
   { files: ['**/*.ts'] },
+
+  // Environment
   {
     languageOptions: {
       globals: globals.node,
@@ -15,22 +20,20 @@ export default [
       },
     },
   },
+
+  // Basic rules
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  {
-    rules: {
-      'no-console': 'error',
-    },
-  },
+  eslintPluginPlaywright.configs['flat/recommended'],
+  eslintPluginPrettierRecommended,
+
+  // Project's own rules
   {
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'error',
-    },
-  },
-  eslintPluginPlaywright.configs['flat/recommended'],
-  {
-    rules: {
+      'no-console': 'warn',
       'playwright/no-nested-step': 'off',
+      'prettier/prettier': 'warn',
     },
     settings: {
       playwright: {
@@ -40,5 +43,4 @@ export default [
       },
     },
   },
-  eslintPluginPrettierRecommended,
 ];
