@@ -7,9 +7,10 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@_src/*": ["src/*"],
-      "@_pw-config": ["playwright.config.ts"]
+      "@_config/*": ["config/*"],
+      "@_pw-config": ["playwright.config.ts"],
+      "@_src/*": ["src/*"]
     },
-    "ignoreDeprecations": "5.0"
+    // "ignoreDeprecations": "6.0"
   }
 }
