@@ -5,6 +5,27 @@ test.describe.configure({ mode: 'serial' });
 test.describe('Create, verify and delete article', () => {
   let articleData: AddArticleModel;
 
+  // Test przerobiony pod fixture randomArticle z article.fixtures.ts
+
+  // test(
+  //   'create new article',
+  //   { tag: ['@GAD-R04-01', '@logged'] },
+  //   async ({ createRandomArticle, randomArticle }) => {
+  //     const articleContext = await randomArticle(prepareRandomArticle());
+  //     // Arrange
+  //     articleData = articleContext.articleData;
+
+  //     // Act
+  //     const articlePage = createRandomArticle.articlePage;
+
+  //     // Assert
+  //     await expect.soft(articlePage.articleTitle).toHaveText(articleData.title);
+  //     await expect
+  //       .soft(articlePage.articleBody)
+  //       .toHaveText(articleData.body, { useInnerText: true });
+  //   },
+  // );
+
   test(
     'create new article',
     { tag: ['@GAD-R04-01', '@logged'] },
