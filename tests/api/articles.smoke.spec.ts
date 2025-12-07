@@ -7,7 +7,6 @@ test.describe(
     test('GET articles return status code 200', async ({ request }) => {
       // Arrange
       const expectedStatusCode = 200;
-
       const articlesUrl = '/api/articles';
 
       // Act
@@ -16,5 +15,51 @@ test.describe(
       // Assert
       expect(response.status()).toBe(expectedStatusCode);
     });
+
+    test(
+      'GET articles should return at least one article',
+      { tag: '@predefined_data' },
+      async ({ request }) => {
+        // Arrange
+        const expectedMinArticleCount = 1;
+        const articlesUrl = '/api/articles';
+
+        // Act
+        const response = await request.get(articlesUrl);
+        const responseJson = await response.json();
+
+        // Assert
+        expect(responseJson.length).toBeGreaterThanOrEqual(
+          expectedMinArticleCount,
+        );
+      },
+    );
+
+    test(
+      'GET articles return article object',
+      { tag: '@predefined_data' },
+      async ({ request }) => {
+        // Arrange
+        const expectedRequiredFields = [
+          'id',
+          'user_id',
+          'title',
+          'body',
+          'date',
+          'image',
+        ];
+        const articlesUrl = '/api/articles';
+
+        // Act
+        const response = await request.get(articlesUrl);
+        const responseJson = await response.json();
+        const article = responseJson[0];
+
+        // Assert
+        expectedRequiredFields.forEach((key) => {
+          expect.soft(article).toHaveProperty(key);
+        });
+      },
+    );
   },
 );
