@@ -1,7 +1,10 @@
-import { prepareRandomArticle } from '@_src/factories/article.factory';
-import { prepareRandomComment } from '@_src/factories/comment.factory';
 import { expect, test } from '@_src/fixtures/merge.fixture';
-import { testUser1 } from '@_src/test-data/user-data';
+import {
+  apiLinks,
+  getAuthorizationHeader,
+  prepareArticlePayload,
+  prepareCommentPayload,
+} from '@_src/utils/api.util';
 
 test.describe(
   'Verify comments CRUD operations',
@@ -11,33 +14,11 @@ test.describe(
     let headers: { [key: string]: string };
 
     test.beforeAll('create an article', async ({ request }) => {
-      // Login
-      const loginUrl = '/api/login';
-      const userData = {
-        email: testUser1.userEmail,
-        password: testUser1.userPassword,
-      };
-      const responseLogin = await request.post(loginUrl, {
-        data: userData,
-      });
-      const responseLoginJson = await responseLogin.json();
+      headers = await getAuthorizationHeader(request);
 
-      // Create article
-      const articlesUrl = '/api/articles';
+      const articleData = prepareArticlePayload();
 
-      const randomArticleData = prepareRandomArticle();
-      const articleData = {
-        title: randomArticleData.title,
-        body: randomArticleData.body,
-        date: '2026-02-07T13:35:09.614Z',
-        image:
-          '.\\data\\images\\256\\tester-app_9f26eff6-2390-4460-8829-81a9cbe21751.jpg',
-      };
-
-      headers = {
-        Authorization: `Bearer ${responseLoginJson.access_token}`,
-      };
-      const responseArticle = await request.post(articlesUrl, {
+      const responseArticle = await request.post(apiLinks.articlesUrl, {
         headers,
         data: articleData,
       });
@@ -51,17 +32,10 @@ test.describe(
     }) => {
       // Arrange
       const expectedStatusCode = 401;
-      const commentsUrl = '/api/comments';
-
-      const randomCommentData = prepareRandomComment();
-      const commentData = {
-        article_id: articleId,
-        body: randomCommentData.body,
-        date: '2026-02-07T13:35:09.614Z',
-      };
+      const commentData = prepareCommentPayload(articleId);
 
       // Act
-      const response = await request.post(commentsUrl, {
+      const response = await request.post(apiLinks.commentsUrl, {
         data: commentData,
       });
 
@@ -76,17 +50,9 @@ test.describe(
       const expectedStatusCode = 201;
 
       // Act
-      const commentsUrl = '/api/comments';
+      const commentData = prepareCommentPayload(articleId);
 
-      const randomCommentData = prepareRandomComment();
-      const commentData = {
-        article_id: articleId,
-        body: randomCommentData.body,
-        date: '2026-02-07T13:35:09.614Z',
-      };
-
-      // Act
-      const response = await request.post(commentsUrl, {
+      const response = await request.post(apiLinks.commentsUrl, {
         headers,
         data: commentData,
       });
