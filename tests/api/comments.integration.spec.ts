@@ -4,8 +4,8 @@ import { expect, test } from '@_src/fixtures/merge.fixture';
 import { testUser1 } from '@_src/test-data/user-data';
 
 test.describe(
-  'Verify comments CRUD operations @api',
-  { tag: ['@GAD-R08-04', '@api'] },
+  'Verify comments CRUD operations',
+  { tag: ['@GAD-R08-04', '@crud'] },
   () => {
     let articleId: number;
     let headers: { [key: string]: string };
@@ -98,7 +98,7 @@ test.describe(
         `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
       ).toBe(expectedStatusCode);
 
-      const comment = await response.json(); 
+      const comment = await response.json();
       expect.soft(comment.body).toEqual(commentData.body);
     });
   },

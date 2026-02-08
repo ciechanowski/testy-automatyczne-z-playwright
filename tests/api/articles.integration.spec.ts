@@ -3,8 +3,8 @@ import { expect, test } from '@_src/fixtures/merge.fixture';
 import { testUser1 } from '@_src/test-data/user-data';
 
 test.describe(
-  'Verify articles CRUD operations @api',
-  { tag: ['@GAD-R08-03', '@api'] },
+  'Verify articles CRUD operations',
+  { tag: ['@GAD-R08-03', '@crud'] },
   () => {
     test('should not create an article without a logged-in user', async ({
       request,
