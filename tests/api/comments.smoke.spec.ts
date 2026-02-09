@@ -22,7 +22,7 @@ test.describe(
         { tag: '@predefined_data' },
         async ({ request }) => {
           // Arrange
-          const expectedMinArticleCount = 1;
+          const expectedMinCommentsCount = 1;
 
           // Act
           const response = await request.get(apiLinks.commentsUrl);
@@ -30,7 +30,7 @@ test.describe(
 
           // Assert
           expect(responseJson.length).toBeGreaterThanOrEqual(
-            expectedMinArticleCount,
+            expectedMinCommentsCount,
           );
         },
       );
@@ -79,10 +79,10 @@ test.describe(
 
         const responseJson = await response.json();
         await test.step('GET comments should return at least one comment', async () => {
-          const expectedMinArticleCount = 1;
+          const expectedMinCommentsCount = 1;
 
           expect(responseJson.length).toBeGreaterThanOrEqual(
-            expectedMinArticleCount,
+            expectedMinCommentsCount,
           );
         });
 
