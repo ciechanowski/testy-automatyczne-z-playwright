@@ -1,5 +1,5 @@
-import { expect, test } from '@_src/fixtures/merge.fixture';
-import { apiLinks } from '@_src/utils/api.util';
+import { apiUrls } from '@_src/api/utils/api.util';
+import { expect, test } from '@_src/ui/fixtures/merge.fixture';
 
 test.describe(
   'Verify comments API endpoint',
@@ -11,7 +11,7 @@ test.describe(
         const expectedStatusCode = 200;
 
         // Act
-        const response = await request.get(apiLinks.commentsUrl);
+        const response = await request.get(apiUrls.commentsUrl);
 
         // Assert
         expect(response.status()).toBe(expectedStatusCode);
@@ -25,7 +25,7 @@ test.describe(
           const expectedMinCommentsCount = 1;
 
           // Act
-          const response = await request.get(apiLinks.commentsUrl);
+          const response = await request.get(apiUrls.commentsUrl);
           const responseJson = await response.json();
 
           // Assert
@@ -49,7 +49,7 @@ test.describe(
           ];
 
           // Act
-          const response = await request.get(apiLinks.commentsUrl);
+          const response = await request.get(apiUrls.commentsUrl);
           const responseJson = await response.json();
           const comment = responseJson[0];
 
@@ -69,7 +69,7 @@ test.describe(
       async ({ request }) => {
         // Arrange
 
-        const response = await request.get(apiLinks.commentsUrl);
+        const response = await request.get(apiUrls.commentsUrl);
 
         await test.step('GET comments return status code 200', async () => {
           const expectedStatusCode = 200;

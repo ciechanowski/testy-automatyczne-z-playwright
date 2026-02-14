@@ -1,12 +1,10 @@
-import { expect, test } from '@_src/fixtures/merge.fixture';
-import {
-  CommentPayload,
-  Headers,
-  apiLinks,
-  getAuthorizationHeader,
-  prepareArticlePayload,
-  prepareCommentPayload,
-} from '@_src/utils/api.util';
+import { prepareArticlePayload } from '@_src/api/factories/article-payload.api.factory';
+import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
+import { prepareCommentPayload } from '@_src/api/factories/comment-payload.api.factory';
+import { CommentPayload } from '@_src/api/models/comment.api.model';
+import { Headers } from '@_src/api/models/headers.api.model';
+import { apiUrls } from '@_src/api/utils/api.util';
+import { expect, test } from '@_src/ui/fixtures/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
 test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
@@ -18,7 +16,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
 
     const articleData = prepareArticlePayload();
 
-    const responseArticle = await request.post(apiLinks.articlesUrl, {
+    const responseArticle = await request.post(apiUrls.articlesUrl, {
       headers,
       data: articleData,
     });
@@ -31,7 +29,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
     // assert article
     await expect(async () => {
       const responseArticleCreated = await request.get(
-        `${apiLinks.articlesUrl}/${articleId}`,
+        `${apiUrls.articlesUrl}/${articleId}`,
       );
       expect(
         responseArticleCreated.status(),
@@ -49,7 +47,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
       const commentData = prepareCommentPayload(articleId);
 
       // Act
-      const response = await request.post(apiLinks.commentsUrl, {
+      const response = await request.post(apiUrls.commentsUrl, {
         data: commentData,
       });
 
@@ -64,7 +62,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
 
     test.beforeEach('create a comment', async ({ request }) => {
       commentData = prepareCommentPayload(articleId);
-      responseComment = await request.post(apiLinks.commentsUrl, {
+      responseComment = await request.post(apiUrls.commentsUrl, {
         headers,
         data: commentData,
       });
@@ -75,7 +73,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
       const expectedStatusCode = 200;
       await expect(async () => {
         const responseCommentCreated = await request.get(
-          `${apiLinks.commentsUrl}/${commentJson.id}`,
+          `${apiUrls.commentsUrl}/${commentJson.id}`,
         );
         expect(
           responseCommentCreated.status(),
@@ -113,7 +111,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
 
         // Act
         const responseCommentDeleted = await request.delete(
-          `${apiLinks.commentsUrl}/${comment.id}`,
+          `${apiUrls.commentsUrl}/${comment.id}`,
           {
             headers,
           },
@@ -130,7 +128,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
         const expectedStatusDeletedComment = 404;
 
         const responseCommentDeletedGet = await request.get(
-          `${apiLinks.commentsUrl}/${comment.id}`,
+          `${apiUrls.commentsUrl}/${comment.id}`,
           {
             headers,
           },
@@ -153,7 +151,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
 
         // Act
         const responseCommentNotDeleted = await request.delete(
-          `${apiLinks.commentsUrl}/${comment.id}`,
+          `${apiUrls.commentsUrl}/${comment.id}`,
         );
 
         // Assert
@@ -167,7 +165,7 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
         const expectedStatusNotDeletedComment = 200;
 
         const responseCommentNotDeletedGet = await request.get(
-          `${apiLinks.commentsUrl}/${comment.id}`,
+          `${apiUrls.commentsUrl}/${comment.id}`,
         );
 
         expect(
