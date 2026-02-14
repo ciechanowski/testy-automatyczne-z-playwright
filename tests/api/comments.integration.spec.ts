@@ -25,6 +25,19 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
 
     const article = await responseArticle.json();
     articleId = article.id;
+
+    const expectedStatusCode = 200;
+
+    // assert article
+    await expect(async () => {
+      const responseArticleCreated = await request.get(
+        `${apiLinks.articlesUrl}/${articleId}`,
+      );
+      expect(
+        responseArticleCreated.status(),
+        `Expected status: ${expectedStatusCode} and observed: ${responseArticleCreated.status()}`,
+      ).toBe(expectedStatusCode);
+    }).toPass({ timeout: 2_000 });
   });
 
   test(
@@ -56,8 +69,19 @@ test.describe('Verify comments CRUD operations', { tag: '@crud' }, () => {
         data: commentData,
       });
 
-      // TODO linked issue
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      // assert comment
+      const commentJson = await responseComment.json();
+
+      const expectedStatusCode = 200;
+      await expect(async () => {
+        const responseCommentCreated = await request.get(
+          `${apiLinks.commentsUrl}/${commentJson.id}`,
+        );
+        expect(
+          responseCommentCreated.status(),
+          `Expected status: ${expectedStatusCode} and observed: ${responseCommentCreated.status()}`,
+        ).toBe(expectedStatusCode);
+      }).toPass({ timeout: 2_000 });
     });
 
     test(

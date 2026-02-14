@@ -43,7 +43,7 @@ test.describe('Verify articles CRUD operations', { tag: '@crud' }, () => {
         data: articleData,
       });
 
-      // assret article exist
+      // assert article exist
       const articleJson = await responseArticle.json();
 
       const expectedStatusCode = 200;
