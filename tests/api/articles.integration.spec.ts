@@ -1,3 +1,4 @@
+import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
 import { prepareArticlePayload } from '@_src/api/factories/article-payload.api.factory';
 import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
 import { ArticlePayload } from '@_src/api/models/article.api.model';
@@ -36,24 +37,11 @@ test.describe('Verify articles CRUD operations', { tag: '@crud' }, () => {
 
     test.beforeEach('create an article', async ({ request }) => {
       articleData = prepareArticlePayload();
-      responseArticle = await request.post(apiUrls.articlesUrl, {
+      responseArticle = await createArticleWithApi(
+        request,
         headers,
-        data: articleData,
-      });
-
-      // assert article exist
-      const articleJson = await responseArticle.json();
-
-      const expectedStatusCode = 200;
-      await expect(async () => {
-        const responseArticleCreated = await request.get(
-          `${apiUrls.articlesUrl}/${articleJson.id}`,
-        );
-        expect(
-          responseArticleCreated.status(),
-          `Expected status: ${expectedStatusCode} and observed: ${responseArticleCreated.status()}`,
-        ).toBe(expectedStatusCode);
-      }).toPass({ timeout: 2_000 });
+        articleData,
+      );
     });
 
     test(
