@@ -29,7 +29,7 @@ test.describe(
 
     test(
       'should delete a comment with a logged-in user',
-      { tag: '@GAD-R08-06' },
+      { tag: '@GAD-R09-04' },
       async ({ request }) => {
         // Arrange
         const expectedStatusCode = 200;
@@ -64,7 +64,7 @@ test.describe(
 
     test(
       'should not delete a comment with a non logged-in user',
-      { tag: '@GAD-R08-06' },
+      { tag: '@GAD-R09-04' },
       async ({ request }) => {
         // Arrange
         const expectedStatusCode = 401;

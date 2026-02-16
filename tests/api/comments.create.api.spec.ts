@@ -23,7 +23,7 @@ test.describe(
 
     test(
       'should not create a comment without a logged-in user',
-      { tag: '@GAD-R08-04' },
+      { tag: '@GAD-R09-02' },
       async ({ request }) => {
         // Arrange
         const expectedStatusCode = 401;
@@ -41,7 +41,7 @@ test.describe(
 
     test(
       'should create a comment with a logged-in user',
-      { tag: '@GAD-R08-04' },
+      { tag: '@GAD-R09-02' },
       async ({ request }) => {
         // Arrange
         const expectedStatusCode = 201;

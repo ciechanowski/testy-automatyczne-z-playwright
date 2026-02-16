@@ -11,7 +11,7 @@ test.describe(
   () => {
     test(
       'should not create an article without a logged-in user',
-      { tag: '@GAD-R08-03' },
+      { tag: '@GAD-R09-01' },
       async ({ request }) => {
         // Arrange
         const expectedStatusCode = 401;
@@ -36,7 +36,7 @@ test.describe(
 
       test(
         'should create an article with a logged-in user',
-        { tag: '@GAD-R08-03' },
+        { tag: '@GAD-R09-01' },
         async ({ request }) => {
           // Arrange
           const expectedStatusCode = 201;
@@ -57,6 +57,36 @@ test.describe(
           ).toBe(expectedStatusCode);
 
           const articleJson = await responseArticle.json();
+          expect.soft(articleJson.title).toEqual(articleData.title);
+          expect.soft(articleJson.body).toEqual(articleData.body);
+        },
+      );
+
+      test(
+        'should create new article when modified article id not exist with a logged-in user',
+        { tag: '@GAD-R10-01' },
+        async ({ request }) => {
+          // Arrange
+          const expectedStatusCode = 201;
+          const articleData = prepareArticlePayload();
+
+          // Act
+          const responseArticlePut = await request.put(
+            `${apiUrls.articlesUrl}/${new Date().valueOf()}`,
+            {
+              headers,
+              data: articleData,
+            },
+          );
+
+          // Assert
+          const actualResponseStatus = responseArticlePut.status();
+          expect(
+            actualResponseStatus,
+            `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
+          ).toBe(expectedStatusCode);
+
+          const articleJson = await responseArticlePut.json();
           expect.soft(articleJson.title).toEqual(articleData.title);
           expect.soft(articleJson.body).toEqual(articleData.body);
         },
