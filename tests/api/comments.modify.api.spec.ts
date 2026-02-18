@@ -1,19 +1,21 @@
-import { expectGetResponseStatus } from '@_src/api/assertions/assertions.api';
 import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
 import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
 import { createCommentWithApi } from '@_src/api/factories/comment-create.api.factory';
+import { prepareCommentPayload } from '@_src/api/factories/comment-payload.api.factory';
+import { CommentPayload } from '@_src/api/models/comment.api.model';
 import { Headers } from '@_src/api/models/headers.api.model';
 import { apiUrls } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/ui/fixtures/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
 test.describe(
-  'Verify comments delete operations',
-  { tag: ['@crud', '@delete', '@api', '@comment'] },
+  'Verify comments modify operations',
+  { tag: ['@crud', '@modify', '@api', '@comment'] },
   () => {
     let articleId: number;
     let headers: Headers;
     let responseComment: APIResponse;
+    let commentData: CommentPayload;
 
     test.beforeAll('create an article', async ({ request }) => {
       headers = await getAuthorizationHeader(request);
@@ -24,73 +26,89 @@ test.describe(
     });
 
     test.beforeEach('create a comment', async ({ request }) => {
-      responseComment = await createCommentWithApi(request, headers, articleId);
+      commentData = prepareCommentPayload(articleId);
+      responseComment = await createCommentWithApi(
+        request,
+        headers,
+        articleId,
+        commentData,
+      );
     });
 
     test(
-      'should delete a comment with logged-in user',
-      { tag: '@GAD-R09-04' },
+      'should modify a comment with logged-in user',
+      { tag: '@GAD-R10-02' },
       async ({ request }) => {
         // Arrange
         const expectedStatusCode = 200;
         const comment = await responseComment.json();
+        const modifiedCommentData = prepareCommentPayload(articleId);
 
         // Act
-        const responseCommentDeleted = await request.delete(
+        const responseCommentModified = await request.put(
           `${apiUrls.commentsUrl}/${comment.id}`,
           {
             headers,
+            data: modifiedCommentData,
           },
         );
 
         // Assert
-        const actualResponseStatus = responseCommentDeleted.status();
+        const actualResponseStatus = responseCommentModified.status();
         expect(
           actualResponseStatus,
           `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
         ).toBe(expectedStatusCode);
 
-        // Assert deleted comment
-        const expectedStatusDeletedComment = 404;
-
-        await expectGetResponseStatus(
-          request,
+        // Assert modified comment
+        const modifiedCommentGet = await request.get(
           `${apiUrls.commentsUrl}/${comment.id}`,
-          expectedStatusDeletedComment,
-          headers,
         );
+
+        const modifiedCommentGetJson = await modifiedCommentGet.json();
+
+        expect
+          .soft(modifiedCommentGetJson.body)
+          .toEqual(modifiedCommentData.body);
+        expect.soft(modifiedCommentGetJson.body).not.toEqual(commentData.body);
       },
     );
 
     test(
-      'should not delete a comment with non logged-in user',
-      { tag: '@GAD-R09-04' },
+      'should not modify a comment with non logged-in user',
+      { tag: '@GAD-R10-02' },
       async ({ request }) => {
         // Arrange
         const expectedStatusCode = 401;
         const comment = await responseComment.json();
+        const modifiedCommentData = prepareCommentPayload(articleId);
 
         // Act
-        const responseCommentNotDeleted = await request.delete(
+        const responseCommentNotModified = await request.put(
           `${apiUrls.commentsUrl}/${comment.id}`,
+          {
+            data: modifiedCommentData,
+          },
         );
 
         // Assert
-        const actualResponseStatus = responseCommentNotDeleted.status();
+        const actualResponseStatus = responseCommentNotModified.status();
         expect(
           actualResponseStatus,
           `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
         ).toBe(expectedStatusCode);
 
-        // Assert non deleted comment
-        const expectedStatusNotDeletedComment = 200;
-
-        await expectGetResponseStatus(
-          request,
+        // Assert not modified comment
+        const modifiedCommentGet = await request.get(
           `${apiUrls.commentsUrl}/${comment.id}`,
-          expectedStatusNotDeletedComment,
-          headers,
         );
+
+        const modifiedCommentGetJson = await modifiedCommentGet.json();
+
+        expect
+          .soft(modifiedCommentGetJson.body)
+          .not.toEqual(modifiedCommentData.body);
+        expect.soft(modifiedCommentGetJson.body).toEqual(commentData.body);
       },
     );
   },

@@ -10,7 +10,7 @@ test.describe(
   { tag: ['@crud', '@create', '@api', '@article'] },
   () => {
     test(
-      'should not create an article without a logged-in user',
+      'should not create an article without logged-in user',
       { tag: '@GAD-R09-01' },
       async ({ request }) => {
         // Arrange
@@ -35,7 +35,7 @@ test.describe(
       });
 
       test(
-        'should create an article with a logged-in user',
+        'should create an article with logged-in user',
         { tag: '@GAD-R09-01' },
         async ({ request }) => {
           // Arrange
@@ -63,7 +63,7 @@ test.describe(
       );
 
       test(
-        'should create new article when modified article id not exist with a logged-in user',
+        'should create new article when modified article id not exist with logged-in user',
         { tag: '@GAD-R10-01' },
         async ({ request }) => {
           // Arrange

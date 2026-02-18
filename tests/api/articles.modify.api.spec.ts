@@ -29,7 +29,7 @@ test.describe(
     });
 
     test(
-      'should modify and replace content for an article with a logged-in user',
+      'should modify and replace content for an article with logged-in user',
       { tag: '@GAD-R10-01' },
       async ({ request }) => {
         // Arrange

@@ -30,7 +30,7 @@ test.describe(
     });
 
     test(
-      'should delete an article with a logged-in user',
+      'should delete an article with logged-in user',
       { tag: '@GAD-R09-03' },
       async ({ request }) => {
         // Arrange
