@@ -28,84 +28,209 @@ test.describe(
       );
     });
 
-    test(
-      'should modify and replace content for an article with logged-in user',
-      { tag: '@GAD-R10-01' },
-      async ({ request }) => {
-        // Arrange
-        const expectedStatusCode = 200;
-        const articleJson = await responseArticle.json();
-        const articleId = articleJson.id;
-        const modifiedArticleData = prepareArticlePayload();
+    test.describe('fully modify article', () => {
+      test(
+        'should modify and replace content for an article with logged-in user',
+        { tag: '@GAD-R10-01' },
+        async ({ request }) => {
+          // Arrange
+          const expectedStatusCode = 200;
+          const articleJson = await responseArticle.json();
+          const articleId = articleJson.id;
+          const modifiedArticleData = prepareArticlePayload();
 
-        // Act
-        const responseArticlePut = await request.put(
-          `${apiUrls.articlesUrl}/${articleId}`,
-          {
-            headers,
-            data: modifiedArticleData,
-          },
-        );
+          // Act
+          const responseArticlePut = await request.put(
+            `${apiUrls.articlesUrl}/${articleId}`,
+            {
+              headers,
+              data: modifiedArticleData,
+            },
+          );
 
-        // Assert
-        const actualResponseStatus = responseArticlePut.status();
-        expect(
-          actualResponseStatus,
-          `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
-        ).toBe(expectedStatusCode);
+          // Assert
+          const actualResponseStatus = responseArticlePut.status();
+          expect(
+            actualResponseStatus,
+            `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
+          ).toBe(expectedStatusCode);
 
-        const modifiedArticleJson = await responseArticlePut.json();
+          const modifiedArticleJson = await responseArticlePut.json();
 
-        expect
-          .soft(modifiedArticleJson.title)
-          .toEqual(modifiedArticleData.title);
-        expect.soft(modifiedArticleJson.body).toEqual(modifiedArticleData.body);
-        expect.soft(modifiedArticleJson.title).not.toEqual(articleData.title);
-        expect.soft(modifiedArticleJson.body).not.toEqual(articleData.body);
-      },
-    );
+          expect
+            .soft(modifiedArticleJson.title)
+            .toEqual(modifiedArticleData.title);
+          expect
+            .soft(modifiedArticleJson.body)
+            .toEqual(modifiedArticleData.body);
+          expect.soft(modifiedArticleJson.title).not.toEqual(articleData.title);
+          expect.soft(modifiedArticleJson.body).not.toEqual(articleData.body);
+        },
+      );
 
-    test(
-      'should not modify an article with non logged-in user',
-      { tag: '@GAD-R10-01' },
-      async ({ request }) => {
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+      test(
+        'should not modify an article with non logged-in user',
+        { tag: '@GAD-R10-03' },
+        async ({ request }) => {
+          await new Promise((resolve) => setTimeout(resolve, 5000));
 
-        // Arrange
-        const expectedStatusCode = 401;
-        const articleJson = await responseArticle.json();
-        const articleId = articleJson.id;
-        const modifiedArticleData = prepareArticlePayload();
+          // Arrange
+          const expectedStatusCode = 401;
+          const articleJson = await responseArticle.json();
+          const articleId = articleJson.id;
+          const modifiedArticleData = prepareArticlePayload();
 
-        // Act
-        const responseArticlePut = await request.put(
-          `${apiUrls.articlesUrl}/${articleId}`,
-          {
-            data: modifiedArticleData,
-          },
-        );
+          // Act
+          const responseArticlePut = await request.put(
+            `${apiUrls.articlesUrl}/${articleId}`,
+            {
+              data: modifiedArticleData,
+            },
+          );
 
-        // Assert
-        const actualResponseStatus = responseArticlePut.status();
-        expect(
-          actualResponseStatus,
-          `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
-        ).toBe(expectedStatusCode);
+          // Assert
+          const actualResponseStatus = responseArticlePut.status();
+          expect(
+            actualResponseStatus,
+            `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
+          ).toBe(expectedStatusCode);
 
-        const nonModifiedArticle = await request.get(
-          `${apiUrls.articlesUrl}/${articleId}`,
-        );
+          const nonModifiedArticle = await request.get(
+            `${apiUrls.articlesUrl}/${articleId}`,
+          );
 
-        const nonModifiedArticleJson = await nonModifiedArticle.json();
-        expect
-          .soft(nonModifiedArticleJson.title)
-          .not.toEqual(modifiedArticleData.title);
-        expect
-          .soft(nonModifiedArticleJson.body)
-          .not.toEqual(modifiedArticleData.body);
-        expect.soft(nonModifiedArticleJson.title).toEqual(articleData.title);
-        expect.soft(nonModifiedArticleJson.body).toEqual(articleData.body);
-      },
-    );
+          const nonModifiedArticleJson = await nonModifiedArticle.json();
+          expect
+            .soft(nonModifiedArticleJson.title)
+            .not.toEqual(modifiedArticleData.title);
+          expect
+            .soft(nonModifiedArticleJson.body)
+            .not.toEqual(modifiedArticleData.body);
+          expect.soft(nonModifiedArticleJson.title).toEqual(articleData.title);
+          expect.soft(nonModifiedArticleJson.body).toEqual(articleData.body);
+        },
+      );
+    });
+
+    test.describe('partially modify article', () => {
+      test(
+        'should partially modify and replace content for an article with logged-in user',
+        { tag: '@GAD-R10-03' },
+        async ({ request }) => {
+          // Arrange
+          const expectedStatusCode = 200;
+          const articleJson = await responseArticle.json();
+          const articleId = articleJson.id;
+          const modifiedArticleData = {
+            title: `Patched title ${new Date().toISOString()}`,
+          };
+
+          // Act
+          const responseArticlePatch = await request.patch(
+            `${apiUrls.articlesUrl}/${articleId}`,
+            {
+              headers,
+              data: modifiedArticleData,
+            },
+          );
+
+          // Assert
+          const actualResponseStatus = responseArticlePatch.status();
+          expect(
+            actualResponseStatus,
+            `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
+          ).toBe(expectedStatusCode);
+
+          const modifiedArticleJson = await responseArticlePatch.json();
+
+          expect
+            .soft(modifiedArticleJson.title)
+            .toEqual(modifiedArticleData.title);
+          expect.soft(modifiedArticleJson.title).not.toEqual(articleData.title);
+          expect.soft(modifiedArticleJson.body).toEqual(articleData.body);
+        },
+      );
+
+      test(
+        'should not partially modify an article with non logged-in user',
+        { tag: '@GAD-R10-03' },
+        async ({ request }) => {
+          await new Promise((resolve) => setTimeout(resolve, 5000));
+
+          // Arrange
+          const expectedStatusCode = 401;
+          const articleJson = await responseArticle.json();
+          const articleId = articleJson.id;
+          const modifiedArticleData = {
+            title: `Patched title ${new Date().toISOString()}`,
+          };
+
+          // Act
+          const responseArticlePatch = await request.patch(
+            `${apiUrls.articlesUrl}/${articleId}`,
+            {
+              data: modifiedArticleData,
+            },
+          );
+
+          // Assert
+          const actualResponseStatus = responseArticlePatch.status();
+          expect(
+            actualResponseStatus,
+            `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
+          ).toBe(expectedStatusCode);
+
+          const nonModifiedArticle = await request.get(
+            `${apiUrls.articlesUrl}/${articleId}`,
+          );
+
+          const nonModifiedArticleJson = await nonModifiedArticle.json();
+          expect
+            .soft(nonModifiedArticleJson.title)
+            .not.toEqual(modifiedArticleData.title);
+          expect.soft(nonModifiedArticleJson.title).toEqual(articleData.title);
+          expect.soft(nonModifiedArticleJson.body).toEqual(articleData.body);
+        },
+      );
+
+      test(
+        'should not partially modify an article with improper field logged-in user',
+        { tag: '@GAD-R10-03' },
+        async ({ request }) => {
+          await new Promise((resolve) => setTimeout(resolve, 5000));
+
+          // Arrange
+          const expectedStatusCode = 422;
+          const nonExistingField = 'nonExistingField';
+          const expectedErrorMessage = `One of field is invalid (empty, invalid or too long) or there are some additional fields: Field validation: "${nonExistingField}" not in [id,user_id,title,body,date,image]`;
+
+          const articleJson = await responseArticle.json();
+          const articleId = articleJson.id;
+          const modifiedArticleData = { [nonExistingField]: 'Hello' };
+          modifiedArticleData[nonExistingField] = 'Hello';
+
+          // Act
+          const responseArticlePatch = await request.patch(
+            `${apiUrls.articlesUrl}/${articleId}`,
+            {
+              headers,
+              data: modifiedArticleData,
+            },
+          );
+
+          // Assert
+          const actualResponseStatus = responseArticlePatch.status();
+          expect(
+            actualResponseStatus,
+            `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
+          ).toBe(expectedStatusCode);
+
+          const responseArticlePatchJson = await responseArticlePatch.json();
+          expect
+            .soft(responseArticlePatchJson.error.message)
+            .toEqual(expectedErrorMessage);
+        },
+      );
+    });
   },
 );
