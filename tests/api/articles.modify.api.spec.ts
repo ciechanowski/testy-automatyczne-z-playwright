@@ -70,7 +70,7 @@ test.describe(
 
       test(
         'should not modify an article with non logged-in user',
-        { tag: '@GAD-R10-03' },
+        { tag: '@GAD-R10-01' },
         async ({ request }) => {
           await new Promise((resolve) => setTimeout(resolve, 5000));
 
@@ -194,7 +194,7 @@ test.describe(
       );
 
       test(
-        'should not partially modify an article with improper field logged-in user',
+        'should not partially modify an article with an improper field logged-in user',
         { tag: '@GAD-R10-03' },
         async ({ request }) => {
           await new Promise((resolve) => setTimeout(resolve, 5000));
