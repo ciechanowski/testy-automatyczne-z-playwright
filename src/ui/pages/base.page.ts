@@ -1,9 +1,11 @@
 import { Page } from '@playwright/test';
 
 export class BasePage {
-  url = '';
+  url: string;
 
-  constructor(protected page: Page) {}
+  constructor(protected page: Page) {
+    this.url = '';
+  }
 
   async goto(parameters = ''): Promise<void> {
     await this.page.goto(`${this.url}${parameters}`);

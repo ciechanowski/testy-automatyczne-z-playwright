@@ -1,17 +1,19 @@
 import { apiUrls } from '@_src/api/utils/api.util';
-import { expect, test } from '@_src/ui/fixtures/merge.fixture';
+import { expect, test } from '@_src/merge.fixture';
 
 test.describe(
   'Verify articles API endpoint',
   { tag: ['@GAD-R08-01', '@smoke'] },
   () => {
     test.describe('Verify each condition in separate test', () => {
-      test('GET articles return status code 200', async ({ request }) => {
+      test('GET articles return status code 200', async ({
+        articlesRequest,
+      }) => {
         // Arrange
         const expectedStatusCode = 200;
 
         // Act
-        const response = await request.get(apiUrls.articlesUrl);
+        const response = await articlesRequest.get();
 
         // Assert
         expect(response.status()).toBe(expectedStatusCode);
