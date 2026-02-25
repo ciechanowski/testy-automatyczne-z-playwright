@@ -71,7 +71,7 @@ test.describe(
       test(
         'should not modify an article with non logged-in user',
         { tag: '@GAD-R10-01' },
-        async ({ request }) => {
+        async ({ request, articlesRequest }) => {
           await new Promise((resolve) => setTimeout(resolve, 5000));
 
           // Arrange
@@ -95,9 +95,7 @@ test.describe(
             `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
           ).toBe(expectedStatusCode);
 
-          const nonModifiedArticle = await request.get(
-            `${apiUrls.articlesUrl}/${articleId}`,
-          );
+          const nonModifiedArticle = await articlesRequest.getOne(articleId);
 
           const nonModifiedArticleJson = await nonModifiedArticle.json();
           expect
@@ -154,7 +152,7 @@ test.describe(
       test(
         'should not partially modify an article with non logged-in user',
         { tag: '@GAD-R10-03' },
-        async ({ request }) => {
+        async ({ request, articlesRequest }) => {
           await new Promise((resolve) => setTimeout(resolve, 5000));
 
           // Arrange
@@ -180,9 +178,7 @@ test.describe(
             `expect status code ${expectedStatusCode} and received ${actualResponseStatus}`,
           ).toBe(expectedStatusCode);
 
-          const nonModifiedArticle = await request.get(
-            `${apiUrls.articlesUrl}/${articleId}`,
-          );
+          const nonModifiedArticle = await articlesRequest.getOne(articleId);
 
           const nonModifiedArticleJson = await nonModifiedArticle.json();
           expect

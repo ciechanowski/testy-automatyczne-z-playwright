@@ -1,4 +1,3 @@
-import { apiUrls } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/merge.fixture';
 
 test.describe(
@@ -22,12 +21,12 @@ test.describe(
       test(
         'GET articles should return at least one article',
         { tag: '@predefined_data' },
-        async ({ request }) => {
+        async ({ articlesRequest }) => {
           // Arrange
           const expectedMinArticlesCount = 1;
 
           // Act
-          const response = await request.get(apiUrls.articlesUrl);
+          const response = await articlesRequest.get();
           const responseJson = await response.json();
 
           // Assert
@@ -40,7 +39,7 @@ test.describe(
       test(
         'GET articles return article object',
         { tag: '@predefined_data' },
-        async ({ request }) => {
+        async ({ articlesRequest }) => {
           // Arrange
           const expectedRequiredFields = [
             'id',
@@ -52,7 +51,7 @@ test.describe(
           ];
 
           // Act
-          const response = await request.get(apiUrls.articlesUrl);
+          const response = await articlesRequest.get();
           const responseJson = await response.json();
           const article = responseJson[0];
 
@@ -69,10 +68,10 @@ test.describe(
     test(
       'GET articles should return an object with required fields',
       { tag: '@predefined_data' },
-      async ({ request }) => {
+      async ({ articlesRequest }) => {
         // Arrange
 
-        const response = await request.get(apiUrls.articlesUrl);
+        const response = await articlesRequest.get();
 
         await test.step('GET articles return status code 200', async () => {
           const expectedStatusCode = 200;
