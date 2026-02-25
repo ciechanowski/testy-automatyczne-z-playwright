@@ -15,13 +15,18 @@ test.describe(
     let headers: Headers;
     let responseComment: APIResponse;
 
-    test.beforeAll('create an article', async ({ request }) => {
-      headers = await getAuthorizationHeader(request);
-      const responseArticle = await createArticleWithApi(request, headers);
+    test.beforeAll(
+      'create an article',
+      async ({ request, articlesRequestLogged }) => {
+        headers = await getAuthorizationHeader(request);
+        const responseArticle = await createArticleWithApi(
+          articlesRequestLogged,
+        );
 
-      const article = await responseArticle.json();
-      articleId = article.id;
-    });
+        const article = await responseArticle.json();
+        articleId = article.id;
+      },
+    );
 
     test.beforeEach('create a comment', async ({ request }) => {
       responseComment = await prepareAndCreateCommentWithApi(

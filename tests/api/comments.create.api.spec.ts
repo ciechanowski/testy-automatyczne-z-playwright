@@ -13,13 +13,18 @@ test.describe(
     let articleId: number;
     let headers: Headers;
 
-    test.beforeAll('create an article', async ({ request }) => {
-      headers = await getAuthorizationHeader(request);
-      const responseArticle = await createArticleWithApi(request, headers);
+    test.beforeAll(
+      'create an article',
+      async ({ request, articlesRequestLogged }) => {
+        headers = await getAuthorizationHeader(request);
+        const responseArticle = await createArticleWithApi(
+          articlesRequestLogged,
+        );
 
-      const article = await responseArticle.json();
-      articleId = article.id;
-    });
+        const article = await responseArticle.json();
+        articleId = article.id;
+      },
+    );
 
     test(
       'should not create a comment without logged-in user',
