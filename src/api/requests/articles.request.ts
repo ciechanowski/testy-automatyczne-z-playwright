@@ -14,17 +14,42 @@ export class ArticlesRequest {
   }
 
   async get(): Promise<APIResponse> {
-    return await this.request.get(this.url);
+    return await this.request.get(this.url, { headers: this.headers });
   }
 
   async getOne(articleId: string): Promise<APIResponse> {
-    return await this.request.get(`${this.url}/${articleId}`);
+    return await this.request.get(`${this.url}/${articleId}`, {
+      headers: this.headers,
+    });
   }
 
   async post(data: ArticlePayload): Promise<APIResponse> {
     return await this.request.post(this.url, {
       headers: this.headers,
       data,
+    });
+  }
+
+  async put(data: ArticlePayload, articleId: string): Promise<APIResponse> {
+    return await this.request.put(`${apiUrls.articlesUrl}/${articleId}`, {
+      headers: this.headers,
+      data,
+    });
+  }
+
+  async patch(
+    data: Partial<ArticlePayload>,
+    articleId: string,
+  ): Promise<APIResponse> {
+    return await this.request.patch(`${apiUrls.articlesUrl}/${articleId}`, {
+      headers: this.headers,
+      data,
+    });
+  }
+
+  async delete(articleId: string): Promise<APIResponse> {
+    return await this.request.delete(`${this.url}/${articleId}`, {
+      headers: this.headers,
     });
   }
 }

@@ -1,8 +1,6 @@
 import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
 import { prepareArticlePayload } from '@_src/api/factories/article-payload.api.factory';
-import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
-import { Headers } from '@_src/api/models/headers.api.model';
-import { apiUrls } from '@_src/api/utils/api.util';
+import { timestamp } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/merge.fixture';
 
 test.describe(
@@ -26,12 +24,6 @@ test.describe(
     );
 
     test.describe('create operations', () => {
-      let headers: Headers;
-
-      test.beforeAll('should login', async ({ request }) => {
-        headers = await getAuthorizationHeader(request);
-      });
-
       test(
         'should create an article with logged-in user',
         { tag: '@GAD-R09-01' },
@@ -62,18 +54,15 @@ test.describe(
       test(
         'should create new article when modified article id not exist with logged-in user',
         { tag: '@GAD-R10-01' },
-        async ({ request }) => {
+        async ({ articlesRequestLogged }) => {
           // Arrange
           const expectedStatusCode = 201;
           const articleData = prepareArticlePayload();
 
           // Act
-          const responseArticlePut = await request.put(
-            `${apiUrls.articlesUrl}/${new Date().valueOf()}`,
-            {
-              headers,
-              data: articleData,
-            },
+          const responseArticlePut = await articlesRequestLogged.put(
+            articleData,
+            timestamp(),
           );
 
           // Assert

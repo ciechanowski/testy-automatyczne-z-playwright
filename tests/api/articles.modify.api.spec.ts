@@ -1,9 +1,6 @@
 import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
 import { prepareArticlePayload } from '@_src/api/factories/article-payload.api.factory';
-import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
 import { ArticlePayload } from '@_src/api/models/article.api.model';
-import { Headers } from '@_src/api/models/headers.api.model';
-import { apiUrls } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
@@ -12,12 +9,7 @@ test.describe(
   { tag: ['@crud', '@modification', '@api', '@article'] },
   () => {
     let responseArticle: APIResponse;
-    let headers: Headers;
     let articleData: ArticlePayload;
-
-    test.beforeAll('should login', async ({ request }) => {
-      headers = await getAuthorizationHeader(request);
-    });
 
     test.beforeEach('create an article', async ({ articlesRequestLogged }) => {
       articleData = prepareArticlePayload();
@@ -31,7 +23,7 @@ test.describe(
       test(
         'should modify and replace content for an article with logged-in user',
         { tag: '@GAD-R10-01' },
-        async ({ request }) => {
+        async ({ articlesRequestLogged }) => {
           // Arrange
           const expectedStatusCode = 200;
           const articleJson = await responseArticle.json();
@@ -39,12 +31,9 @@ test.describe(
           const modifiedArticleData = prepareArticlePayload();
 
           // Act
-          const responseArticlePut = await request.put(
-            `${apiUrls.articlesUrl}/${articleId}`,
-            {
-              headers,
-              data: modifiedArticleData,
-            },
+          const responseArticlePut = await articlesRequestLogged.put(
+            modifiedArticleData,
+            articleId,
           );
 
           // Assert
@@ -70,7 +59,7 @@ test.describe(
       test(
         'should not modify an article with non logged-in user',
         { tag: '@GAD-R10-01' },
-        async ({ request, articlesRequest }) => {
+        async ({ articlesRequest }) => {
           await new Promise((resolve) => setTimeout(resolve, 5000));
 
           // Arrange
@@ -80,11 +69,9 @@ test.describe(
           const modifiedArticleData = prepareArticlePayload();
 
           // Act
-          const responseArticlePut = await request.put(
-            `${apiUrls.articlesUrl}/${articleId}`,
-            {
-              data: modifiedArticleData,
-            },
+          const responseArticlePut = await articlesRequest.put(
+            modifiedArticleData,
+            articleId,
           );
 
           // Assert
@@ -113,7 +100,7 @@ test.describe(
       test(
         'should partially modify and replace content for an article with logged-in user',
         { tag: '@GAD-R10-03' },
-        async ({ request }) => {
+        async ({ articlesRequestLogged }) => {
           // Arrange
           const expectedStatusCode = 200;
           const articleJson = await responseArticle.json();
@@ -122,13 +109,9 @@ test.describe(
             title: `Patched title ${new Date().toISOString()}`,
           };
 
-          // Act
-          const responseArticlePatch = await request.patch(
-            `${apiUrls.articlesUrl}/${articleId}`,
-            {
-              headers,
-              data: modifiedArticleData,
-            },
+          const responseArticlePatch = await articlesRequestLogged.patch(
+            modifiedArticleData,
+            articleId,
           );
 
           // Assert
@@ -151,7 +134,7 @@ test.describe(
       test(
         'should not partially modify an article with non logged-in user',
         { tag: '@GAD-R10-03' },
-        async ({ request, articlesRequest }) => {
+        async ({ articlesRequest }) => {
           await new Promise((resolve) => setTimeout(resolve, 5000));
 
           // Arrange
@@ -163,11 +146,9 @@ test.describe(
           };
 
           // Act
-          const responseArticlePatch = await request.patch(
-            `${apiUrls.articlesUrl}/${articleId}`,
-            {
-              data: modifiedArticleData,
-            },
+          const responseArticlePatch = await articlesRequest.patch(
+            modifiedArticleData,
+            articleId,
           );
 
           // Assert
@@ -191,7 +172,7 @@ test.describe(
       test(
         'should not partially modify an article with an improper field logged-in user',
         { tag: '@GAD-R10-03' },
-        async ({ request }) => {
+        async ({ articlesRequestLogged }) => {
           await new Promise((resolve) => setTimeout(resolve, 5000));
 
           // Arrange
@@ -201,16 +182,16 @@ test.describe(
 
           const articleJson = await responseArticle.json();
           const articleId = articleJson.id;
-          const modifiedArticleData = { [nonExistingField]: 'Hello' };
+
+          const modifiedArticleData: Record<string, unknown> = {
+            [nonExistingField]: 'Hello',
+          };
           modifiedArticleData[nonExistingField] = 'Hello';
 
           // Act
-          const responseArticlePatch = await request.patch(
-            `${apiUrls.articlesUrl}/${articleId}`,
-            {
-              headers,
-              data: modifiedArticleData,
-            },
+          const responseArticlePatch = await articlesRequestLogged.patch(
+            modifiedArticleData,
+            articleId,
           );
 
           // Assert
