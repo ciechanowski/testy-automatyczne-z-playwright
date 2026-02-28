@@ -1,9 +1,6 @@
-import { expectGetResponseStatus } from '@_src/api/assertions/assertions.api';
+import { expectGetOneResponseStatus } from '@_src/api/assertions/assertions.api';
 import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
-import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
 import { prepareAndCreateCommentWithApi } from '@_src/api/factories/comment-create.api.factory';
-import { Headers } from '@_src/api/models/headers.api.model';
-import { apiUrls } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
@@ -12,21 +9,14 @@ test.describe(
   { tag: ['@crud', '@delete', '@api', '@comment'] },
   () => {
     let articleId: number;
-    let headers: Headers;
     let responseComment: APIResponse;
 
-    test.beforeAll(
-      'create an article',
-      async ({ request, articlesRequestLogged }) => {
-        headers = await getAuthorizationHeader(request);
-        const responseArticle = await createArticleWithApi(
-          articlesRequestLogged,
-        );
+    test.beforeAll('create an article', async ({ articlesRequestLogged }) => {
+      const responseArticle = await createArticleWithApi(articlesRequestLogged);
 
-        const article = await responseArticle.json();
-        articleId = article.id;
-      },
-    );
+      const article = await responseArticle.json();
+      articleId = article.id;
+    });
 
     test.beforeEach('create a comment', async ({ commentsRequestLogged }) => {
       responseComment = await prepareAndCreateCommentWithApi(
@@ -38,7 +28,7 @@ test.describe(
     test(
       'should delete a comment with logged-in user',
       { tag: '@GAD-R09-04' },
-      async ({ request, commentsRequestLogged }) => {
+      async ({ commentsRequestLogged }) => {
         // Arrange
         const expectedStatusCode = 200;
         const comment = await responseComment.json();
@@ -58,11 +48,10 @@ test.describe(
         // Assert deleted comment
         const expectedStatusDeletedComment = 404;
 
-        await expectGetResponseStatus(
-          request,
-          `${apiUrls.commentsUrl}/${comment.id}`,
+        await expectGetOneResponseStatus(
+          commentsRequestLogged,
+          comment.id,
           expectedStatusDeletedComment,
-          headers,
         );
       },
     );
@@ -70,7 +59,7 @@ test.describe(
     test(
       'should not delete a comment with non logged-in user',
       { tag: '@GAD-R09-04' },
-      async ({ request, commentsRequest }) => {
+      async ({ commentsRequest }) => {
         // Arrange
         const expectedStatusCode = 401;
         const comment = await responseComment.json();
@@ -90,11 +79,10 @@ test.describe(
         // Assert non deleted comment
         const expectedStatusNotDeletedComment = 200;
 
-        await expectGetResponseStatus(
-          request,
-          `${apiUrls.commentsUrl}/${comment.id}`,
+        await expectGetOneResponseStatus(
+          commentsRequest,
+          comment.id,
           expectedStatusNotDeletedComment,
-          headers,
         );
       },
     );

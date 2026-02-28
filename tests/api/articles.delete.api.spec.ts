@@ -1,8 +1,7 @@
-import { expectGetResponseStatus } from '@_src/api/assertions/assertions.api';
+import { expectGetOneResponseStatus } from '@_src/api/assertions/assertions.api';
 import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
 import { prepareArticlePayload } from '@_src/api/factories/article-payload.api.factory';
 import { ArticlePayload } from '@_src/api/models/article.api.model';
-import { apiUrls } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
@@ -24,7 +23,7 @@ test.describe(
     test(
       'should delete an article with logged-in user',
       { tag: '@GAD-R09-03' },
-      async ({ request, articlesRequestLogged }) => {
+      async ({ articlesRequestLogged }) => {
         // Arrange
         const expectedStatusCode = 200;
         const articleJson = await responseArticle.json();
@@ -43,9 +42,9 @@ test.describe(
 
         // Assert check deleted article
         const expectedDeletedArticleStatusCode = 404;
-        await expectGetResponseStatus(
-          request,
-          `${apiUrls.articlesUrl}/${articleId}`,
+        await expectGetOneResponseStatus(
+          articlesRequestLogged,
+          articleId,
           expectedDeletedArticleStatusCode,
         );
       },
@@ -54,7 +53,7 @@ test.describe(
     test(
       'should not delete an article with non logged-in user',
       { tag: '@GAD-R09-03' },
-      async ({ request, articlesRequest }) => {
+      async ({ articlesRequest }) => {
         await new Promise((resolve) => setTimeout(resolve, 5000));
 
         // Arrange
@@ -74,9 +73,9 @@ test.describe(
 
         // Assert check not deleted article
         const expectedNotDeletedArticleStatusCode = 200;
-        await expectGetResponseStatus(
-          request,
-          `${apiUrls.articlesUrl}/${articleId}`,
+        await expectGetOneResponseStatus(
+          articlesRequest,
+          articleId,
           expectedNotDeletedArticleStatusCode,
         );
       },

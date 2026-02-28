@@ -1,14 +1,13 @@
-import { Headers } from '@_src/api/models/headers.api.model';
+import { ArticlesRequest } from '@_src/api/requests/articles.request';
+import { CommentsRequest } from '@_src/api/requests/comments.request';
 import { expect } from '@_src/merge.fixture';
-import { APIRequestContext } from '@playwright/test';
 
-export async function expectGetResponseStatus(
-  request: APIRequestContext,
-  url: string,
+export async function expectGetOneResponseStatus(
+  requestObject: ArticlesRequest | CommentsRequest,
+  id: string,
   expectedStatusCode: number,
-  headers?: Headers,
 ): Promise<void> {
-  const responseGet = await request.get(url, { headers });
+  const responseGet = await requestObject.getOne(id);
 
   expect(
     responseGet.status(),
