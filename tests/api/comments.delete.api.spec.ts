@@ -28,10 +28,9 @@ test.describe(
       },
     );
 
-    test.beforeEach('create a comment', async ({ request }) => {
+    test.beforeEach('create a comment', async ({ commentsRequestLogged }) => {
       responseComment = await prepareAndCreateCommentWithApi(
-        request,
-        headers,
+        commentsRequestLogged,
         articleId,
       );
     });
@@ -39,17 +38,14 @@ test.describe(
     test(
       'should delete a comment with logged-in user',
       { tag: '@GAD-R09-04' },
-      async ({ request }) => {
+      async ({ request, commentsRequestLogged }) => {
         // Arrange
         const expectedStatusCode = 200;
         const comment = await responseComment.json();
 
         // Act
-        const responseCommentDeleted = await request.delete(
-          `${apiUrls.commentsUrl}/${comment.id}`,
-          {
-            headers,
-          },
+        const responseCommentDeleted = await commentsRequestLogged.delete(
+          comment.id,
         );
 
         // Assert
@@ -74,14 +70,14 @@ test.describe(
     test(
       'should not delete a comment with non logged-in user',
       { tag: '@GAD-R09-04' },
-      async ({ request }) => {
+      async ({ request, commentsRequest }) => {
         // Arrange
         const expectedStatusCode = 401;
         const comment = await responseComment.json();
 
         // Act
-        const responseCommentNotDeleted = await request.delete(
-          `${apiUrls.commentsUrl}/${comment.id}`,
+        const responseCommentNotDeleted = await commentsRequest.delete(
+          comment.id,
         );
 
         // Assert

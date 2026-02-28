@@ -1,10 +1,7 @@
 import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
-import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
 import { createCommentWithApi } from '@_src/api/factories/comment-create.api.factory';
 import { prepareCommentPayload } from '@_src/api/factories/comment-payload.api.factory';
 import { CommentPayload } from '@_src/api/models/comment.api.model';
-import { Headers } from '@_src/api/models/headers.api.model';
-import { apiUrls } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
@@ -13,28 +10,22 @@ test.describe(
   { tag: ['@crud', '@modify', '@api', '@comment'] },
   () => {
     let articleId: number;
-    let headers: Headers;
     let responseComment: APIResponse;
     let commentData: CommentPayload;
 
-    test.beforeAll(
-      'create an article',
-      async ({ request, articlesRequestLogged }) => {
-        headers = await getAuthorizationHeader(request);
-        const responseArticle = await await createArticleWithApi(
-          articlesRequestLogged,
-        );
+    test.beforeAll('create an article', async ({ articlesRequestLogged }) => {
+      const responseArticle = await await createArticleWithApi(
+        articlesRequestLogged,
+      );
 
-        const article = await responseArticle.json();
-        articleId = article.id;
-      },
-    );
+      const article = await responseArticle.json();
+      articleId = article.id;
+    });
 
-    test.beforeEach('create a comment', async ({ request }) => {
+    test.beforeEach('create a comment', async ({ commentsRequestLogged }) => {
       commentData = prepareCommentPayload(articleId);
       responseComment = await createCommentWithApi(
-        request,
-        headers,
+        commentsRequestLogged,
         commentData,
       );
     });
@@ -46,19 +37,16 @@ test.describe(
         test(
           'should modify a comment with logged-in user',
           { tag: '@GAD-R10-02' },
-          async ({ request }) => {
+          async ({ commentsRequestLogged }) => {
             // Arrange
             const expectedStatusCode = 200;
             const comment = await responseComment.json();
             const modifiedCommentData = prepareCommentPayload(articleId);
 
             // Act
-            const responseCommentModified = await request.put(
-              `${apiUrls.commentsUrl}/${comment.id}`,
-              {
-                headers,
-                data: modifiedCommentData,
-              },
+            const responseCommentModified = await commentsRequestLogged.put(
+              modifiedCommentData,
+              comment.id,
             );
 
             // Assert
@@ -69,8 +57,8 @@ test.describe(
             ).toBe(expectedStatusCode);
 
             // Assert modified comment
-            const modifiedCommentGet = await request.get(
-              `${apiUrls.commentsUrl}/${comment.id}`,
+            const modifiedCommentGet = await commentsRequestLogged.getOne(
+              comment.id,
             );
 
             const modifiedCommentGetJson = await modifiedCommentGet.json();
@@ -87,18 +75,16 @@ test.describe(
         test(
           'should not modify a comment with non logged-in user',
           { tag: '@GAD-R10-02' },
-          async ({ request }) => {
+          async ({ commentsRequest }) => {
             // Arrange
             const expectedStatusCode = 401;
             const comment = await responseComment.json();
             const modifiedCommentData = prepareCommentPayload(articleId);
 
             // Act
-            const responseCommentNotModified = await request.put(
-              `${apiUrls.commentsUrl}/${comment.id}`,
-              {
-                data: modifiedCommentData,
-              },
+            const responseCommentNotModified = await commentsRequest.put(
+              modifiedCommentData,
+              comment.id,
             );
 
             // Assert
@@ -109,9 +95,7 @@ test.describe(
             ).toBe(expectedStatusCode);
 
             // Assert not modified comment
-            const modifiedCommentGet = await request.get(
-              `${apiUrls.commentsUrl}/${comment.id}`,
-            );
+            const modifiedCommentGet = await commentsRequest.getOne(comment.id);
 
             const modifiedCommentGetJson = await modifiedCommentGet.json();
 
@@ -131,7 +115,7 @@ test.describe(
         test(
           'should partially modify a comment with logged-in user',
           { tag: '@GAD-R10-04' },
-          async ({ request }) => {
+          async ({ commentsRequest, commentsRequestLogged }) => {
             // Arrange
             const expectedStatusCode = 200;
             const comment = await responseComment.json();
@@ -140,12 +124,9 @@ test.describe(
             };
 
             // Act
-            const responseCommentModified = await request.patch(
-              `${apiUrls.commentsUrl}/${comment.id}`,
-              {
-                headers,
-                data: modifiedCommentData,
-              },
+            const responseCommentModified = await commentsRequestLogged.patch(
+              modifiedCommentData,
+              comment.id,
             );
 
             // Assert
@@ -156,8 +137,8 @@ test.describe(
             ).toBe(expectedStatusCode);
 
             // Assert modified comment
-            const nonModifiedCommentGet = await request.get(
-              `${apiUrls.commentsUrl}/${comment.id}`,
+            const nonModifiedCommentGet = await commentsRequest.getOne(
+              comment.id,
             );
 
             const nonModifiedCommentGetJson =
@@ -178,7 +159,7 @@ test.describe(
         test(
           'should not partially modify a comment with non logged-in user',
           { tag: '@GAD-R10-04' },
-          async ({ request }) => {
+          async ({ commentsRequest }) => {
             // Arrange
             const expectedStatusCode = 401;
             const comment = await responseComment.json();
@@ -187,11 +168,9 @@ test.describe(
             };
 
             // Act
-            const responseCommentNotModified = await request.patch(
-              `${apiUrls.commentsUrl}/${comment.id}`,
-              {
-                data: modifiedCommentData,
-              },
+            const responseCommentNotModified = await commentsRequest.patch(
+              modifiedCommentData,
+              comment.id,
             );
 
             // Assert
@@ -202,8 +181,8 @@ test.describe(
             ).toBe(expectedStatusCode);
 
             // Assert not modified comment
-            const nonModifiedCommentGet = await request.get(
-              `${apiUrls.commentsUrl}/${comment.id}`,
+            const nonModifiedCommentGet = await commentsRequest.getOne(
+              comment.id,
             );
 
             const nonModifiedCommentGetJson =
@@ -221,24 +200,23 @@ test.describe(
         test(
           'should not partially modify a comment with a non existing field for logged-in user',
           { tag: '@GAD-R10-04' },
-          async ({ request }) => {
+          async ({ commentsRequestLogged }) => {
             // Arrange
             const expectedStatusCode = 422;
             const nonExistingField = 'nonExistingField';
             const expectedErrorMessage = `One of field is invalid (empty, invalid or too long) or there are some additional fields: Field validation: "${nonExistingField}" not in [id,user_id,article_id,body,date]`;
 
             const comment = await responseComment.json();
-            const modifiedCommentData = { [nonExistingField]: 'Lorem ipsum' };
-            modifiedCommentData[nonExistingField] = 'Lorem ipsum';
+            const modifiedCommentData: Record<string, unknown> = {
+              [nonExistingField]: 'Lorem ipsum',
+            };
 
             // Act
-            const responseCommentNotModified = await request.patch(
-              `${apiUrls.commentsUrl}/${comment.id}`,
-              {
-                headers,
-                data: modifiedCommentData,
-              },
-            );
+            const responseCommentNotModified =
+              await commentsRequestLogged.patch(
+                modifiedCommentData,
+                comment.id,
+              );
 
             // Assert
             const actualResponseStatus = responseCommentNotModified.status();
@@ -255,8 +233,8 @@ test.describe(
               .toEqual(expectedErrorMessage);
 
             // Assert not modified comment
-            const nonModifiedCommentGet = await request.get(
-              `${apiUrls.commentsUrl}/${comment.id}`,
+            const nonModifiedCommentGet = await commentsRequestLogged.getOne(
+              comment.id,
             );
 
             const nonModifiedCommentGetJson =

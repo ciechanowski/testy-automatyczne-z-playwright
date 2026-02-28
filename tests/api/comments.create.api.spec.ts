@@ -1,9 +1,7 @@
 import { createArticleWithApi } from '@_src/api/factories/article-create.api.factory';
-import { getAuthorizationHeader } from '@_src/api/factories/authorization-header.api.factory';
 import { createCommentWithApi } from '@_src/api/factories/comment-create.api.factory';
 import { prepareCommentPayload } from '@_src/api/factories/comment-payload.api.factory';
-import { Headers } from '@_src/api/models/headers.api.model';
-import { apiUrls } from '@_src/api/utils/api.util';
+import { timestamp } from '@_src/api/utils/api.util';
 import { expect, test } from '@_src/merge.fixture';
 
 test.describe(
@@ -11,33 +9,24 @@ test.describe(
   { tag: ['@crud', '@create', '@api', '@comment'] },
   () => {
     let articleId: number;
-    let headers: Headers;
 
-    test.beforeAll(
-      'create an article',
-      async ({ request, articlesRequestLogged }) => {
-        headers = await getAuthorizationHeader(request);
-        const responseArticle = await createArticleWithApi(
-          articlesRequestLogged,
-        );
+    test.beforeAll('create an article', async ({ articlesRequestLogged }) => {
+      const responseArticle = await createArticleWithApi(articlesRequestLogged);
 
-        const article = await responseArticle.json();
-        articleId = article.id;
-      },
-    );
+      const article = await responseArticle.json();
+      articleId = article.id;
+    });
 
     test(
       'should not create a comment without logged-in user',
       { tag: '@GAD-R09-02' },
-      async ({ request }) => {
+      async ({ commentsRequest }) => {
         // Arrange
         const expectedStatusCode = 401;
         const commentData = prepareCommentPayload(articleId);
 
         // Act
-        const response = await request.post(apiUrls.commentsUrl, {
-          data: commentData,
-        });
+        const response = await commentsRequest.post(commentData);
 
         // Assert
         expect(response.status()).toBe(expectedStatusCode);
@@ -47,15 +36,14 @@ test.describe(
     test(
       'should create a comment with logged-in user',
       { tag: '@GAD-R09-02' },
-      async ({ request }) => {
+      async ({ commentsRequestLogged }) => {
         // Arrange
         const expectedStatusCode = 201;
 
         // Act
         const commentData = prepareCommentPayload(articleId);
         const responseComment = await createCommentWithApi(
-          request,
-          headers,
+          commentsRequestLogged,
           commentData,
         );
 
@@ -74,18 +62,15 @@ test.describe(
     test(
       'should create a comment when modification on nonexisting id requested with logged-in user',
       { tag: '@GAD-R10-02' },
-      async ({ request }) => {
+      async ({ commentsRequest, commentsRequestLogged }) => {
         // Arrange
         const expectedStatusCode = 201;
         const commentData = prepareCommentPayload(articleId);
 
         // Act
-        const responseCommentPut = await request.put(
-          `${apiUrls.commentsUrl}/${new Date().valueOf()}`,
-          {
-            headers,
-            data: commentData,
-          },
+        const responseCommentPut = await commentsRequestLogged.put(
+          commentData,
+          timestamp(),
         );
 
         // Assert
@@ -97,8 +82,8 @@ test.describe(
 
         // Assert modified comment
         const responseCommentPutJson = await responseCommentPut.json();
-        const commentGet = await request.get(
-          `${apiUrls.commentsUrl}/${responseCommentPutJson.id}`,
+        const commentGet = await commentsRequest.getOne(
+          responseCommentPutJson.id,
         );
 
         const commentGetJson = await commentGet.json();
