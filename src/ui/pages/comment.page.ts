@@ -21,6 +21,11 @@ export class CommentPage extends BasePage {
     this.returnLink = this.page.getByTestId('return');
   }
 
+  async gotoId(id: string): Promise<CommentPage> {
+    await this.page.goto(`${this.url}?id=${id}`);
+    return this;
+  }
+
   async clickEditButton(): Promise<EditCommentView> {
     await this.editButton.click();
     return new EditCommentView(this.page);
