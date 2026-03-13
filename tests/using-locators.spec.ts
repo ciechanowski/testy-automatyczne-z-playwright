@@ -15,7 +15,7 @@ test.describe('Finding different elements with raw locators', () => {
   });
 
   test('Find label element by ID (XPath)', async ({ page }) => {
-    const elementSelector = "//*[@id='id-label-element']";
+    const elementSelector = '//*[@id="id-label-element"]';
     const elementLocator = page.locator(elementSelector);
     const expectedMessage = 'Some text for label';
 
