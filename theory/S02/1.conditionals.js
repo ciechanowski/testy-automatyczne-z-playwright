@@ -49,3 +49,16 @@ switch (someOtherNumber) {
 
 // articles and links:
 // https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals
+
+
+// Różne operatory porównywania wartości:
+
+// x > 3 – czy x jest większy od 3,
+// x >= 3 – czy x jest większy lub równy 3,
+// x < 3 - czy x jest mniejszy niż 3,
+// x <= 3 - czy x jest mniejszy lub równy 3,
+// x !== 3 - czy x nie jest równy 3,
+// x > 0 && x < 3 - czy x jest większy od 0 i mniejszy 3,
+// x >= 0 && x <= 3 - czy x jest większy od 0 i mniejszy 3 (włącznie z wartościami granicznymi),
+// x < 0 || x > 3 - czy x jest mniejszy od 0 lub większy od 3.
+// Operatory && (który oznacza oraz) i || (który oznacza lub) służą do łączenia warunków.
