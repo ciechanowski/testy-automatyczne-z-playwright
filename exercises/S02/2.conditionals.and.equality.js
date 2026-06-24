@@ -29,3 +29,29 @@ elementChecker([1, 2, false, 0, 8, 0, 1, 8, true, 'test', '0'])
 // Element value is zero!
 // Element value is zero!
 // Element value is one!
+
+// UWAGA! W przypadku funkcji warunkowej, która składa się z dwóch ifów, spełniających ten sam warunek - program zostaje wykonany dla każdego z nich.
+function elementChecker(anArray) {
+    anArray.forEach(element => {
+        if (element >= 18) {
+            console.log("Element value is one!");
+        } if (element >= 13) {
+            console.log("Element value is zero!");
+        }
+    });
+}
+
+elementChecker([19])
+
+// Natomiast jeżeli składa się z ifa oraz else if, które spełniają jednakowe warunki - to wykonuje się tylko sam if!!!
+function elementChecker(anArray) {
+    anArray.forEach(element => {
+        if (element >= 18) {
+            console.log("Element value is one!");
+        } else if (element >= 13) {
+            console.log("Element value is zero!");
+        }
+    });
+}
+
+elementChecker([19])
